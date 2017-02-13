@@ -1,0 +1,55 @@
+<%= bootstrap_form_for(:details, url: caregivers_path, html: { method: :post }) do |f| %>
+
+  <div>
+    <%= f.text_field :first_name %>
+  </div>
+
+  <div>
+    <%= f.text_field :last_name %>
+  </div>
+
+  <div>
+    <%= f.email_field :email %>
+  </div>
+
+  <div>
+    <%= f.password_field :password %>
+  </div>
+
+  <div>
+    <%= f.text_field :contact %>
+  </div>
+
+    <% f.text_field :usertype, value: 'Caregiver' } %> 
+  <div>
+    <%= f.text_field :gender %>
+  </div>
+
+  <div>
+    <%= f.text_field :certification %>
+  </div>
+
+  <div>
+    <%= f.text_field :languages %>
+  </div>
+
+  <div>
+    <%= f.text_field :specialties %>
+  </div>
+
+  <div>
+    <%= f.text_field :yearsofexperience %>
+  </div>
+
+  <div>
+    <%= f.text_field :experiencedescription %>
+  </div>
+
+  <div>
+    <%= f.text_field :photo %>
+  </div>
+
+  <div>
+    <%= f.submit %>
+  </div>
+<% end %>

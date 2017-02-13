@@ -8,20 +8,20 @@ class FammembersController < ApplicationController
   end
 
   def new
+    @user = User.new
     @fammember = Fammember.new
   end
 
   def create
-    @fammember = Fammember.new(fammember_params)
-    if
-      @fammember.save
-      fammember = Caregiver.find(@fammember)
-      user = User.new
-      user.usertypes = fammember
-      user.save
-      redirect_to @fammember, notice: "Your profile has been sucessfully created"
-    else
-      render :new
+    @user = User.new(user_params)
+      if @user.save
+        @fammember = Fammember.new
+        @fammember.user_id = @user.id
+      if @fammember.save
+          redirect_to login_path, notice: "Your profile has been sucessfully created, please log in."
+      else
+        redirect_to :back, notice: "Error..."
+      end
     end
   end
 
@@ -30,21 +30,23 @@ class FammembersController < ApplicationController
   end
 
   def update
-    @fammember = Fammember.update(fammember_params)
+    @user = User.update(user_params)
   end
 
   def destroy
-    @fammember = Fammember.destroy
-    redirect_to fammembers_url, notice: "Your profile was successfully destroyed"
+    @user.destroy
+    # @fammember = Fammember.destroy
+    redirect_to '/', notice: "Your profile was successfully destroyed"
   end
 
   private
 
   def set_fammember
+    @user = User.find(params[:id])
     @fammember = Fammember.find(params[:id])
   end
 
   def fammember_params
-    params.require(:fammember).permit(:first_name, :last_name, :contact, :email)
+    params.require(:fammember).permit(:first_name, :last_name, :contact, :email, :password)
   end
 end

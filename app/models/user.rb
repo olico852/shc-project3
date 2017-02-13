@@ -1,5 +1,6 @@
 class User < ApplicationRecord
-  has_many :fammembers, :caregivers
+  has_one :fammember
+  has_one :caregiver
   # belongs_to :usertypes, polymorphic:true, dependent: :destroy --> delete
   before_save {self.email = email.downcase}
 
@@ -12,7 +13,6 @@ class User < ApplicationRecord
 
   validates :contact, length: {is: 8},
   presence: true
-
 
   has_secure_password
 

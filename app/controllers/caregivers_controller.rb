@@ -2,6 +2,7 @@ class CaregiversController < ApplicationController
   before_action :set_caregiver, only: [:show, :edit, :update, :destroy]
 
   def index
+    @caregivers = Caregiver.all
   end
 
   def show

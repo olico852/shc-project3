@@ -1,5 +1,30 @@
 <h1>Hi there care giver</h1>
 <center><button type = "button" class = "btn btn-default"><%= link_to 'Join Us', new_caregiver_path %></button></center>
 <center><button type = "button" class = "btn btn-default"><%= link_to 'Login', login_url %></button></center>
+<div class="container">
+<table>
+  <thead>
+    <tr>
+      <th class="col-xs-2">Name</th>
+      <th class="col-xs-2">Years of experience</th>
+      <th class="col-xs-2">Expertise</th>
+      <th class="col-xs-2">Languages Spoken</th>
+      <th class="col-xs-2">View Profile</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <% @caregivers.each do |caregiver| %>
+      <td><%= @caregiver.name %></td>
+      <td><%= @caregiver.yearsofexperience %></td>
+      <td><%= @caregiver.specialties%></td>
+      <td><%= @caregiver.languages %></td>
+      <td><%= link_to 'Profile', caregiver_path %></td>
+    </tr>
+      <% end %>
+  </tbody>
+</table>
+</div>
+
 
 <%= link_to 'Back', root_path %>

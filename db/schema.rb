@@ -10,44 +10,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170212144014) do
+ActiveRecord::Schema.define(version: 20170213152739) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "caregivers", force: :cascade do |t|
-    t.string   "first_name"
-    t.string   "last_name"
-    t.integer  "contact"
-    t.string   "email"
-    t.string   "password_digest"
+    t.integer  "user_id"
     t.string   "gender"
     t.string   "certification"
+    t.string   "languages"
+    t.string   "specialties"
     t.integer  "yearsofexperience"
     t.text     "experiencedescription"
     t.string   "photo"
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
-  end
-
-  create_table "careseekers", force: :cascade do |t|
-    t.string   "first_name"
-    t.string   "last_name"
-    t.integer  "contact"
-    t.string   "emai"
-    t.string   "password"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_caregivers_on_user_id", using: :btree
   end
 
   create_table "fammembers", force: :cascade do |t|
-    t.string   "first_name"
-    t.string   "last_name"
-    t.integer  "contact"
-    t.string   "email"
-    t.string   "password_digest"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_fammembers_on_user_id", using: :btree
   end
 
   create_table "patients", force: :cascade do |t|
@@ -56,19 +42,31 @@ ActiveRecord::Schema.define(version: 20170212144014) do
     t.string   "last_name"
     t.string   "address"
     t.string   "gender"
+    t.string   "frequency"
     t.text     "condition_description"
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
     t.index ["fammember_id"], name: "index_patients_on_fammember_id", using: :btree
   end
 
-  create_table "users", force: :cascade do |t|
-    t.string   "usertypes_type"
-    t.integer  "usertypes_id"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
-    t.index ["usertypes_type", "usertypes_id"], name: "index_users_on_usertypes_type_and_usertypes_id", using: :btree
+  create_table "reviews", force: :cascade do |t|
+    t.integer  "rating"
+    t.text     "comment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
+  create_table "users", force: :cascade do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "email"
+    t.string   "password_digest"
+    t.integer  "contact"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_foreign_key "caregivers", "users"
+  add_foreign_key "fammembers", "users"
   add_foreign_key "patients", "fammembers"
 end

@@ -5,7 +5,7 @@ class CreateCaregivers < ActiveRecord::Migration[5.0]
       t.string :gender
       t.string :certification
       t.string :languages
-      t.string :specialities
+      t.string :specialties
       t.integer :yearsofexperience
       t.text :experiencedescription
       t.string :photo

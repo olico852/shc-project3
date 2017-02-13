@@ -1,6 +1,5 @@
 class Fammember < ApplicationRecord
-  belongs_to :users
-  # has_many :users, as: :usertypes --> DELETE
+  belongs_to :user
   has_many :patients
 
 end

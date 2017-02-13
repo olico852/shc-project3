@@ -1,6 +1,7 @@
 class User < ApplicationRecord
-  has_many :fammembers, :caregivers
-  # belongs_to :usertypes, polymorphic:true, dependent: :destroy --> delete
+  has_one :fammember, dependent: :destroy
+  has_one :caregiver, dependent: :destroy
+
   before_save {self.email = email.downcase}
 
   validates :email,

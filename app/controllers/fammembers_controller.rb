@@ -17,11 +17,11 @@ class FammembersController < ApplicationController
       if @user.save
         @fammember = Fammember.new
         @fammember.user_id = @user.id
-      if @fammember.save
+        if @fammember.save
           redirect_to login_path, notice: "Your profile has been sucessfully created, please log in."
+        end
       else
         redirect_to :back, notice: "Error..."
-      end
     end
   end
 
@@ -31,10 +31,11 @@ class FammembersController < ApplicationController
 
   def update
     @user = User.update(fammember_params)
+    redirect_to fammember_path
   end
 
   def destroy
-    @fammember.destroy
+    @user.destroy
     # @fammember = Fammember.destroy
     redirect_to '/', notice: "Your profile was successfully destroyed"
   end
@@ -42,8 +43,8 @@ class FammembersController < ApplicationController
   private
 
   def set_fammember
-    @user = Fammember.find(params[:user_id])
-    @fammember = Fammember.find(params[:id])
+    @user = User.find(params[:id])
+    # @fammember = Fammember.find(params[:id])
   end
 
   def fammember_params

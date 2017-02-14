@@ -35,7 +35,7 @@ class CaregiversController < ApplicationController
   end
 
   def destroy
-    @caregiver.destroy
+    @user.destroy
     redirect_to '/', notice: "Your account has been successfully deleted."
   end
 

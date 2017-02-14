@@ -1,4 +1,5 @@
 class Caregiver < ApplicationRecord
+
   before_save {self.email = email.downcase}
   belongs_to :users
   has_many :reviews , as: :reviewable, dependent: :destroy
@@ -9,14 +10,9 @@ class Caregiver < ApplicationRecord
   # has_many :languages, as: :sglangs, dependent: :destroy
 
 
+  belongs_to :user
 
 
-  searchable do
-    integer :id
-    text :first_name, boost: 5.0
-    text :last_name, boost: 5.0
-    integer :yearsofexperience
-    text :experiencedescription
-  end
+  attr_accessor :email, :password
 
 end

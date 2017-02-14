@@ -1,15 +1,4 @@
-<%= bootstrap_form_for(@caregiver) do |f| %>
-  <% if @caregiver.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize( @caregiver.errors.count, "error") %> prohibited this caregiver from being saved:</h2>
-
-      <ul>
-      <% @caregiver.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+<%= bootstrap_form_for(:details, url: caregivers_path, html: { method: :post }) do |f| %>
 
   <div>
     <%= f.text_field :first_name %>
@@ -17,10 +6,6 @@
 
   <div>
     <%= f.text_field :last_name %>
-  </div>
-
-  <div>
-    <%= f.text_field :contact %>
   </div>
 
   <div>
@@ -32,11 +17,24 @@
   </div>
 
   <div>
+    <%= f.text_field :contact %>
+  </div>
+
+    <% f.text_field :usertype, value: 'Caregiver' %> 
+  <div>
     <%= f.text_field :gender %>
   </div>
 
   <div>
     <%= f.text_field :certification %>
+  </div>
+
+  <div>
+    <%= f.text_field :languages %>
+  </div>
+
+  <div>
+    <%= f.text_field :specialties %>
   </div>
 
   <div>

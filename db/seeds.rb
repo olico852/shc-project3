@@ -6,38 +6,38 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+User.create(first_name: "Dickson", last_name: "Goh", contact: 12345678, email: 'dicksongoh@gmail.com', password: 'keepsakes', usertype: 'Caregiver')
+User.create(first_name: "Richard", last_name: "Really", contact: 77777777, email: 'thatssad@gmail.com', password: 'wahwahwah', usertype: 'Caregiver')
+User.create(first_name: "Cinderelly", last_name: "Rella", contact: 12345678, email: 'fairygodmother@gmail.com', password: 'pumpkin', usertype: 'Caregiver')
+Caregiver.create(user_id: 1, gender: 'male', certification: 'something',languages: 'new', specialties: 'signing', yearsofexperience: '8', experiencedescription: 'howhowhow', photo: 'helphelphelp')
+Caregiver.create(user_id: 2, gender: 'male', certification: 'certifed uncertified',languages: 'anglais', specialties: 'lying', yearsofexperience: '8', experiencedescription: 'meowwww', photo: 'urghhhhh')
+Caregiver.create(user_id: 3, gender: 'female', certification: 'certifed uncertified',languages: 'anglais', specialties: 'lying', yearsofexperience: '8', experiencedescription: 'meowwww', photo: 'urghhhhh')
+
+User.second.update(first_name: "Realname", last_name: "Name", contact: 88888888, email: 'realname@gmail.com', password: 'lieslieslies')
+User.second.caregiver.update(gender: 'female', certification: 'something',languages: 'new', specialties: 'signing', yearsofexperience: '8', experiencedescription: 'howhowhow', photo: 'helphelphelp')
+Caregiver.update(user_id: 2, gender: 'unknownnnnn', certification: 'something',languages: 'new', specialties: 'signing', yearsofexperience: '8', experiencedescription: 'howhowhow', photo: 'helphelphelp')
+# User.destroy(id: 3)
+# User.all
+
+User.create(first_name: "Fam1", last_name: "1", contact: 12345678, email: 'lifesucks@gmail.com', password: 'keepsakes', usertype: 'Fammember')
+User.create(first_name: "Fam2", last_name: "2", contact: 77777777, email: 'takedrugs@gmail.com', password: 'eheheheehe', usertype: 'Fammember')
+User.create(first_name: "Fam3", last_name: "3", contact: 12345678, email: 'veryverystrange@gmail.com', password: 'hohohoho', usertype: 'Fammember')
+Fammember.create(user_id: 4)
+Fammember.create(user_id: 5)
+Fammember.create(user_id: 6)
+
+# User.fourth.update(first_name: "Realname", last_name: "Name", contact: 88888888, email: 'realname@gmail.com', password: 'lieslieslies', usertype: 'Fammember')
+# User.sixth.fammember.update(gender: 'female', certification: 'something',languages: 'new', specialties: 'signing', yearsofexperience: '8', experiencedescription: 'howhowhow', photo: 'helphelphelp')
 
 
-Fammember.create(first_name: "Dickson", last_name: "Goh", contact: 12345678, email: 'dicksongoh@gmail.com', password: 'keepsakes')
-Fammember.create(first_name: "Johnny", last_name: "Lam", contact: 90344525, email: "johnnylam@gmail.com", password: "yessire")
+# this was how i populated polymorphic tables previously...
 
-Patient.create(fammember_id: '1', first_name: 'Hello', last_name: 'Kitty', address: 'some place', gender: 'Female', condition_description: 'chronic pain. needs daily care' )
-Fammember.first.patients.create(first_name: 'Number', last_name: '2', address: 'where to copy', gender: 'male', condition_description: 'chronic pain. needs more')
-
-
-Patient.create(fammember_id: '1', first_name: 'Kitty', last_name: 'Hello', address: 'some place', gender: 'female', condition_description: 'coollll colllll ')
-
-
-Patient.first.conditions.create!(name: 'General Care')
-Patient.second.conditions.create!(name: 'General Care')
-
-Caregiver.create(first_name: 'Dickson', last_name: 'Goh', contact: 12345678, email: 'objectivedom@gmail.com', password: 'keepsakes', gender: 'female', certification: 'true', yearsofexperience: 'chinese', experiencedescription: '8 years', photo: 'www.lnk.com')
-Caregiver.create(first_name: 'caregiver', last_name: 'two', contact: 12345678, email: 'somethingelse@gmail.com', password: 'keepsakes', gender: 'male', certification: 'true', yearsofexperience: 'chinese', experiencedescription: '8 years', photo: 'www.lnk.com')
-
-Caregiver.first.conditions.create!(name: 'Something else')
-
-Patient.first.locations.create!(name: 'Yishun')
-Patient.second.locations.create!(name: 'Tampines')
-
-Caregiver.first.locations.create!(name: 'Marina')
-
-
-Patient.first.languages.create!(name: 'english')
-Patient.second.languages.create!(name: 'chinese')
-
-Caregiver.first.languages.create!(name: 'tamil')
-
-Patient.first.frequencies.create!(name: 'daily')
-Patient.second.frequencies.create!(name: 'monthly')
-
-Caregiver.first.frequencies.create!(name: 'weekly')
+# Patient.first.languages.create!(name: 'english')
+# Patient.second.languages.create!(name: 'chinese')
+#
+# Caregiver.first.languages.create!(name: 'tamil')
+#
+# Patient.first.frequencies.create!(name: 'daily')
+# Patient.second.frequencies.create!(name: 'monthly')
+#
+# Caregiver.first.frequencies.create!(name: 'weekly')

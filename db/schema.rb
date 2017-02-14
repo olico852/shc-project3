@@ -51,9 +51,16 @@ ActiveRecord::Schema.define(version: 20170213152739) do
 
   create_table "reviews", force: :cascade do |t|
     t.integer  "rating"
-    t.text     "comment"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "comment"
+    t.integer  "caregiver_id"
+    t.integer  "fammember_id"
+    t.string   "reviewable_type"
+    t.integer  "reviewable_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["caregiver_id"], name: "index_reviews_on_caregiver_id", using: :btree
+    t.index ["fammember_id"], name: "index_reviews_on_fammember_id", using: :btree
+    t.index ["reviewable_type", "reviewable_id"], name: "index_reviews_on_reviewable_type_and_reviewable_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
@@ -62,6 +69,7 @@ ActiveRecord::Schema.define(version: 20170213152739) do
     t.string   "email"
     t.string   "password_digest"
     t.integer  "contact"
+    t.string   "usertype"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
   end
@@ -69,4 +77,6 @@ ActiveRecord::Schema.define(version: 20170213152739) do
   add_foreign_key "caregivers", "users"
   add_foreign_key "fammembers", "users"
   add_foreign_key "patients", "fammembers"
+  add_foreign_key "reviews", "caregivers"
+  add_foreign_key "reviews", "fammembers"
 end

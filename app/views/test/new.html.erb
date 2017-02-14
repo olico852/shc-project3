@@ -1,0 +1,22 @@
+<h1>Hello in test folder</h1>
+<table>
+  <thead>
+    <tr>
+      <th class="col-xs-2">Years of experience</th>
+      <th class="col-xs-2">Expertise</th>
+      <th class="col-xs-2">Languages Spoken</th>
+      <th class="col-xs-2">View Profile</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <% if @user.usertype === "Caregiver" %>
+      <p><%= @user.first_name %></p>
+      <p><%= @user.caregiver.yearsofexperience %></p>
+      <p><%= @user.caregiver.gender %></p>
+      <p><%= @user.caregiver.specialties %></p>
+      <% end %>
+      <td><%= link_to 'Profile', caregiver_path %></td>
+    </tr>
+  </tbody>
+</table>

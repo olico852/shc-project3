@@ -1,31 +1,5 @@
 <h1>Welcome back <%= @fammember.name %></h1>
 
-<h3> List of all previous transactions </h3>
-<table>
-  <thead>
-    <tr>
-      <th>Name of caregiver</th>
-      <th>Patient Name</th>
-      <th>Start date of booking</th>
-      <th>Status</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @fammember.transactions.each do |transaction| %>
-    <tr>
-      <td><%= @transaction.caregiver.name %></td>
-      <td><%= @transaction.patient.name %></td>
-      <td><%= @transaction.start_date %></td>
-      <% if @transaction.pending === true %>
-      <td>Pending</td>
-      <% if @transaction.cancelled === true %>
-      <td>Cancelled</td>
-      <% if @transaction.accepted === true %>
-      <td>Ongoing</td>
-      <% if @transaction.concluded === true %>
-      <td>Completed</td>
-    </tr>
-  </tbody>
-</table>
+<li><%= link_to "Search", new_search_path %></li>
 
 <%= link_to 'Back', root_path %>

@@ -13,7 +13,7 @@ class FammembersController < ApplicationController
   end
 
   def create
-    @user = User.new(user_params)
+    @user = User.new(fammember_params)
       if @user.save
         @fammember = Fammember.new
         @fammember.user_id = @user.id
@@ -30,11 +30,11 @@ class FammembersController < ApplicationController
   end
 
   def update
-    @user = User.update(user_params)
+    @user = User.update(fammember_params)
   end
 
   def destroy
-    @user.destroy
+    @fammember.destroy
     # @fammember = Fammember.destroy
     redirect_to '/', notice: "Your profile was successfully destroyed"
   end
@@ -42,11 +42,11 @@ class FammembersController < ApplicationController
   private
 
   def set_fammember
-    @user = User.find(params[:id])
+    @user = Fammember.find(params[:user_id])
     @fammember = Fammember.find(params[:id])
   end
 
   def fammember_params
-    params.require(:fammember).permit(:first_name, :last_name, :contact, :email, :password)
+    params.require(:fammember).permit(:first_name, :last_name, :contact, :email, :password, :usertype)
   end
 end

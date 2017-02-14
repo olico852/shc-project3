@@ -20,7 +20,8 @@
     <%= f.text_field :contact %>
   </div>
 
-    <% f.text_field :usertype, value: 'Caregiver' %> 
+    <%= f.text_field :usertype, value: 'Caregiver', :readonly => 'readonly' %>
+
   <div>
     <%= f.text_field :gender %>
   </div>

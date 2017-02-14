@@ -42,8 +42,8 @@ class CaregiversController < ApplicationController
   private
 
   def set_caregiver
-    @user = Caregiver.find(params[:user_id])
-    @caregiver = Caregiver.find(params[:id])
+    @user = User.find(params[:id])
+    # @caregiver = Caregiver.find(params[:id])
   end
 
   def user_params

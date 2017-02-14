@@ -13,15 +13,15 @@ class FammembersController < ApplicationController
   end
 
   def create
-    @user = User.new(user_params)
+    @user = User.new(fammember_params)
       if @user.save
         @fammember = Fammember.new
         @fammember.user_id = @user.id
-      if @fammember.save
+        if @fammember.save
           redirect_to login_path, notice: "Your profile has been sucessfully created, please log in."
+        end
       else
         redirect_to :back, notice: "Error..."
-      end
     end
   end
 
@@ -30,7 +30,8 @@ class FammembersController < ApplicationController
   end
 
   def update
-    @user = User.update(user_params)
+    @user = User.update(fammember_params)
+    redirect_to fammember_path
   end
 
   def destroy
@@ -43,10 +44,10 @@ class FammembersController < ApplicationController
 
   def set_fammember
     @user = User.find(params[:id])
-    @fammember = Fammember.find(params[:id])
+    # @fammember = Fammember.find(params[:id])
   end
 
   def fammember_params
-    params.require(:fammember).permit(:first_name, :last_name, :contact, :email, :password)
+    params.require(:fammember).permit(:first_name, :last_name, :contact, :email, :password, :usertype)
   end
 end

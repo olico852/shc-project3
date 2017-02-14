@@ -13,6 +13,9 @@ Caregiver.create(user_id: 1, gender: 'male', certification: 'something',language
 Caregiver.create(user_id: 2, gender: 'male', certification: 'certifed uncertified',languages: 'anglais', specialties: 'lying', yearsofexperience: '8', experiencedescription: 'meowwww', photo: 'urghhhhh')
 Caregiver.create(user_id: 3, gender: 'female', certification: 'certifed uncertified',languages: 'anglais', specialties: 'lying', yearsofexperience: '8', experiencedescription: 'meowwww', photo: 'urghhhhh')
 
+User.update(id: 8, usertype: 'Caregiver')
+8	weird	weirdshit	yellow@mellow.com	$2a$10$.3Nz50ZdI5.qgaeZj4gNQOB5NAM6QbCOq3N85WKsKAmyXQAU9degS	97418162		2017-02-14 01:52:08.345447	2017-02-14 01:52:08.345447
+
 User.second.update(first_name: "Realname", last_name: "Name", contact: 88888888, email: 'realname@gmail.com', password: 'lieslieslies')
 User.second.caregiver.update(gender: 'female', certification: 'something',languages: 'new', specialties: 'signing', yearsofexperience: '8', experiencedescription: 'howhowhow', photo: 'helphelphelp')
 Caregiver.update(user_id: 2, gender: 'unknownnnnn', certification: 'something',languages: 'new', specialties: 'signing', yearsofexperience: '8', experiencedescription: 'howhowhow', photo: 'helphelphelp')

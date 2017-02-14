@@ -26,7 +26,6 @@ class FammembersController < ApplicationController
   end
 
   def edit
-    #renders the edit form
   end
 
   def update

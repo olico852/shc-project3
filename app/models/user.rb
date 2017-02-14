@@ -14,7 +14,6 @@ class User < ApplicationRecord
   validates :contact, length: {is: 8},
   presence: true
 
-
   has_secure_password
 
   def self.find_and_authenticate(params)

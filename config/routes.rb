@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :caregivers
   resources :fammembers
   resources :transactions
+  resources :searches
 
   root 'home#index'
 

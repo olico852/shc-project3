@@ -3,9 +3,7 @@ class CreateCaregivers < ActiveRecord::Migration[5.0]
     create_table :caregivers do |t|
       t.belongs_to :user, foreign_key: true
       t.string :gender
-      t.string :certification
-      t.string :languages
-      t.string :specialties
+      t.boolean :certification
       t.integer :yearsofexperience
       t.text :experiencedescription
       t.string :photo

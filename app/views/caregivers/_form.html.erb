@@ -23,21 +23,21 @@
   <div>
     <%= f.text_field :usertype, value: 'Caregiver', :readonly => 'readonly' %>
   </div>
-  
+
   <div>
     <%= f.text_field :gender %>
   </div>
 
   <div>
-    <%= f.text_field :certification %>
+    <%= f.collection_radio_buttons :certification , [[true, 'True'] ,[false, 'False']], :first, :last,  {:item_wrapper_class => 'inline'}  %>
   </div>
 
   <div>
-    <%= f.text_field :languages %>
+    <%= f.collection_check_boxes(:language_ids, Language.all, :id, :sglang) %>
   </div>
 
   <div>
-    <%= f.text_field :specialties %>
+    <%= f.collection_check_boxes(:specialty_ids, Specialty.all, :id, :ability) %>
   </div>
 
   <div>
@@ -45,14 +45,14 @@
   </div>
 
   <div>
-    <%= f.text_field :experiencedescription %>
+    <%= f.text_area :experiencedescription %>
   </div>
 
   <div>
-    <%= f.text_field :photo %>
+    <%= f.file_field :photo %>
   </div>
 
   <div>
-    <%= f.submit %>
+    <%= f.submit "Register" %>
   </div>
 <% end %>

@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  caregiver: one
+  specialty: one
+
+two:
+  caregiver: two
+  specialty: two

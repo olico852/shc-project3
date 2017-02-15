@@ -1,6 +1,6 @@
 class Transaction < ApplicationRecord
 
-  belongs_to :fammember
+  belongs_to :user
   belongs_to :caregiver
 
 

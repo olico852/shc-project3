@@ -1,0 +1,18 @@
+<%= bootstrap_form_for(:transactions, url: caregiver_transactions_path, html: { method: :post }) do |f| %>
+
+  <div>
+    Name of requestor: <%= current_user.first_name %>
+  </div>
+
+  <div>
+    Name of caregiver: <%= @caregiver.id %>
+  </div>
+
+  <div>
+    <%= f.date_field :start_date %>
+  </div>
+  <div>
+    <%= f.submit %>
+  </div>
+
+<% end %>

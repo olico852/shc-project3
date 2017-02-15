@@ -1,1 +1,35 @@
-<h1>Hello  <%= @user.first_name %></h1>
+<h1>Welcome to caregiver profile</h1>
+<table>
+  <thead>
+    <tr>
+      <th class="col-xs-2">Name</th>
+      <th class="col-xs-2">Gender</th>
+      <th class="col-xs-2">Years of experience</th>
+      <th class="col-xs-2">Expertise</th>
+      <th class="col-xs-2">Experience description</th>
+      <th class="col-xs-2">Languages Spoken</th>
+      <th class="col-xs-2">Book now</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <% if current_user.usertype === "Caregiver" %>
+      <td><%= User.find_by(id: params[:id]).first_name %></td>
+      <td><%= @caregiver.gender %></td>
+      <td><%= @caregiver.yearsofexperience %></td>
+      <td><%= @caregiver.specialties %></td>
+      <td><%= @caregiver.experiencedescription %></td>
+      <td><%= @caregiver.languages %></td>
+      <td><%= link_to "Book Now", new_caregiver_transaction_path(@caregiver) %></td>
+      <% elsif current_user.usertype === "Fammember" %>
+      <td><%= User.find_by(id: Caregiver.find_by(id: params[:id]).user_id).first_name %></td>
+      <td><%= @caregiver.gender %></td>
+      <td><%= @caregiver.yearsofexperience %></td>
+      <td><%= @caregiver.specialties %></td>
+      <td><%= @caregiver.experiencedescription %></td>
+      <td><%= @caregiver.languages %></td>
+      <td><%= link_to "Book Now", new_caregiver_transaction_path(@caregiver) %></td>
+      <% end %>
+    </tr>
+  </tbody>
+</table>

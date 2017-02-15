@@ -26,7 +26,6 @@ class FammembersController < ApplicationController
   end
 
   def edit
-    #renders the edit form
   end
 
   def update
@@ -48,6 +47,6 @@ class FammembersController < ApplicationController
   end
 
   def fammember_params
-    params.require(:fammember).permit(:first_name, :last_name, :contact, :email, :password, :usertype)
+    params.require(:fammembers).permit(:first_name, :last_name, :contact, :email, :password, :usertype)
   end
 end

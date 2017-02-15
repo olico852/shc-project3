@@ -1,4 +1,3 @@
 class Fammember < ApplicationRecord
   belongs_to :user
-  # has_many :patients
-end
+  has_many :patients

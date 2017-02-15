@@ -17,8 +17,9 @@ class CaregiversController < ApplicationController
       if @user.save
         @caregiver = Caregiver.new(caregiver_params)
         @caregiver.user_id = @user.id
+
       if @caregiver.save
-          redirect_to login_path, notice: "Your profile has been sucessfully created"
+        redirect_to login_path, notice: "Your profile has been sucessfully created"
       else
         redirect_to :back, notice: "Error..."
       end
@@ -43,7 +44,7 @@ class CaregiversController < ApplicationController
 
   def set_caregiver
     @user = User.find(params[:id])
-    # @caregiver = Caregiver.find(params[:id])
+
   end
 
   def user_params

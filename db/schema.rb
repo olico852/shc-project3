@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170213152739) do
+ActiveRecord::Schema.define(version: 20170214070324) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,7 +37,6 @@ ActiveRecord::Schema.define(version: 20170213152739) do
   end
 
   create_table "patients", force: :cascade do |t|
-    t.integer  "fammember_id"
     t.string   "first_name"
     t.string   "last_name"
     t.string   "address"
@@ -46,21 +45,15 @@ ActiveRecord::Schema.define(version: 20170213152739) do
     t.text     "condition_description"
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
-    t.index ["fammember_id"], name: "index_patients_on_fammember_id", using: :btree
   end
 
   create_table "reviews", force: :cascade do |t|
-    t.integer  "rating"
     t.string   "comment"
-    t.integer  "caregiver_id"
-    t.integer  "fammember_id"
-    t.string   "reviewable_type"
-    t.integer  "reviewable_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-    t.index ["caregiver_id"], name: "index_reviews_on_caregiver_id", using: :btree
-    t.index ["fammember_id"], name: "index_reviews_on_fammember_id", using: :btree
-    t.index ["reviewable_type", "reviewable_id"], name: "index_reviews_on_reviewable_type_and_reviewable_id", using: :btree
+    t.integer  "rating"
+    t.string   "usertype"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -76,7 +69,4 @@ ActiveRecord::Schema.define(version: 20170213152739) do
 
   add_foreign_key "caregivers", "users"
   add_foreign_key "fammembers", "users"
-  add_foreign_key "patients", "fammembers"
-  add_foreign_key "reviews", "caregivers"
-  add_foreign_key "reviews", "fammembers"
 end

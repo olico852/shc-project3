@@ -1,5 +1,15 @@
 class TransactionsController < ApplicationController
-  before_action :is_authenticated
+  before_action :set_transaction, only: [:show, :edit, :update, :destroy]
+  before_action :set_caregiver, only: [:show, :new, :create]
+
+  def index
+    if current_user.usertype === "Fammember"
+      @transactions = Transaction.all
+    end
+  end
+
+  def show
+  end
 
   def new
     @transaction = Transaction.new
@@ -7,12 +17,17 @@ class TransactionsController < ApplicationController
 
   def create
     @transaction = Transaction.new(transaction_params)
+    @transaction.user_id = current_user.id
+    @transaction.caregiver_id = @caregiver.id
     if @transaction.save
-      redirect_to @transaction, notice: 'Thank you for booking with us.'
+      redirect_to root_path, notice: 'Thank you for booking with us.'
     else
       render :new
     end
   end
+
+  # transaction = Transaction.create!(user_id: 3, caregiver_id: 6, pending: true, approved: false, concluded: false, start_date: '2012-12-12', cancelled: false)
+
 
   def edit
   end
@@ -32,7 +47,11 @@ private
     @transaction = Transaction.find(params[:id])
   end
 
+  def set_caregiver
+    @caregiver = Caregiver.find_by(id: params[:caregiver_id])
+  end
+
   def transaction_params
-    params.require(:transaction).permit(:fammember, :caregiver, :patient, :start_date)
+    params.require(:transactions).permit(:start_date)
   end
 end

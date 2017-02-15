@@ -6,9 +6,11 @@
     <% @search.search_caregivers.each do |c| %>
     <div class="div">
       Language: <%= c.languages %><br>
+      Id: <%= c.id %><br>
       Specialties: <%= c.specialties %><br>
       Minimum years of experience: <%= c.yearsofexperience %><br>
-      Gender: <%= c.gender %>
+      Gender: <%= c.gender %><br>
+      <%= link_to "Book now", caregiver_path(c.id) %>
     </div>
     <% end %>
   <% end %>

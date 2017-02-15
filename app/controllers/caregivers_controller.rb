@@ -10,8 +10,12 @@ class CaregiversController < ApplicationController
   end
 
   def show
-  end
-
+      if current_user.usertype === "Caregiver"
+       @caregiver = Caregiver.find_by(user_id: params[:id])
+     elsif current_user.usertype === "Fammember"
+       @caregiver = Caregiver.find_by(id: params[:id])
+    end
+  end 
   def new
     @user = User.new
     @caregiver = Caregiver.new

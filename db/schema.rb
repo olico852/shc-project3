@@ -59,9 +59,8 @@ ActiveRecord::Schema.define(version: 20170213165213) do
   end
 
   create_table "transactions", force: :cascade do |t|
-    t.integer  "fammember_id"
+    t.integer  "user_id"
     t.integer  "caregiver_id"
-    t.integer  "patient_id"
     t.boolean  "pending",      default: true
     t.boolean  "approved",     default: false
     t.boolean  "cancelled",    default: false
@@ -70,8 +69,7 @@ ActiveRecord::Schema.define(version: 20170213165213) do
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
     t.index ["caregiver_id"], name: "index_transactions_on_caregiver_id", using: :btree
-    t.index ["fammember_id"], name: "index_transactions_on_fammember_id", using: :btree
-    t.index ["patient_id"], name: "index_transactions_on_patient_id", using: :btree
+    t.index ["user_id"], name: "index_transactions_on_user_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
@@ -89,6 +87,5 @@ ActiveRecord::Schema.define(version: 20170213165213) do
   add_foreign_key "fammembers", "users"
   add_foreign_key "patients", "fammembers"
   add_foreign_key "transactions", "caregivers"
-  add_foreign_key "transactions", "fammembers"
-  add_foreign_key "transactions", "patients"
+  add_foreign_key "transactions", "users"
 end

@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(version: 20170214070324) do
   end
 
   create_table "patients", force: :cascade do |t|
+    t.integer  "fammember_id"
     t.string   "first_name"
     t.string   "last_name"
     t.string   "address"
@@ -45,6 +46,7 @@ ActiveRecord::Schema.define(version: 20170214070324) do
     t.text     "condition_description"
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
+    t.index ["fammember_id"], name: "index_patients_on_fammember_id", using: :btree
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -92,6 +94,8 @@ ActiveRecord::Schema.define(version: 20170214070324) do
     t.datetime "updated_at",      null: false
   end
 
+  add_foreign_key "caregivers", "users"
+  add_foreign_key "fammembers", "users"
   add_foreign_key "patients", "fammembers"
   add_foreign_key "transactions", "caregivers"
   add_foreign_key "transactions", "fammembers"

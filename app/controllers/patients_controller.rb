@@ -1,5 +1,6 @@
 class PatientsController < ApplicationController
   before_action :set_patient, only: [:show, :edit, :update, :destroy]
+  # before_action :set_fammember, only: [:new, :show, :create]
 
   def index
     @patients = Patient.all
@@ -17,9 +18,10 @@ class PatientsController < ApplicationController
 
   def create
     @patient = Patient.new(patient_params)
-
+    @patient['fammember_id'] = params[:fammember_id]
+    # @patient.fammember_id = @fammember.id
       if @patient.save
-        redirect_to patients_path, notice: "Your profile has been sucessfully created"
+        redirect_to fammembers_path, notice: "Your profile has been sucessfully created"
       else
         redirect_to :back, notice: "Error..."
       end
@@ -37,10 +39,14 @@ class PatientsController < ApplicationController
 
   private
 
+
   def set_patient
     @patient = Patient.find(params[:id])
-
   end
+
+  # def set_fammember
+  #   @fammember = Fammember.find_by(id: current_user.id)
+  # end
 
   def patient_params
     params.require(:patient).permit(:first_name, :last_name, :address, :gender, :frequency, :condition_description)

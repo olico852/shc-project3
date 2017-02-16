@@ -10,16 +10,17 @@ class SessionsController < ApplicationController
       session[:user_id] = user.id
       puts "usertype is :::: #{user.usertype}"
       flash[:success] = "User logged in"
-      if user.usertype == 'Caregiver'
-        redirect_to caregiver_path(user.id) and return
-      elsif user.usertype == 'Fammember'
-        redirect_to fammember_path(user.id) and return
+        if user.usertype == 'Caregiver'
+          redirect_to caregiver_path(user.id) and return
+        elsif user.usertype == 'Fammember'
+          redirect_to fammember_path(user.id) and return
+        end
       else
         flash[:danger] = "Credentials Invalid!!"
         puts 'unsuccessful log in'
-        redirect_to login_path
+        render :new
       end
-    end
+
   end
 
 

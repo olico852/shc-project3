@@ -81,7 +81,7 @@ ActiveRecord::Schema.define(version: 20170215013725) do
   end
 
   create_table "searches", force: :cascade do |t|
-    t.string   "language"
+    t.string   "languages"
     t.string   "specialties"
     t.integer  "yearsofexperience"
     t.string   "gender"

@@ -1,6 +1,7 @@
 class PatientsController < ApplicationController
   before_action :set_patient, only: [:show, :edit, :update, :destroy]
   # before_action :set_fammember, only: [:new, :show, :create]
+  before_action :is_authenticated
 
   def index
     @patients = Patient.all

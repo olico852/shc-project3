@@ -18,14 +18,3 @@ WHERE s.ability = 'Respite care';
 # caregivers = caregivers.where(["language LIKE ?", languages]) if language.present?
 caregivers = caregivers.joins(:languages).where(["language.sglang LIKE?", sglang]) if language.present?
 # caregivers = caregivers.where(["specialties LIKE ?", specialties]) if specialties.present?
-
-<% elsif !current_user %>
-<ul class="nav navbar-nav navbar-right">
-  <li><%= link_to "Home", root_path %></li>
-  <li><%= link_to "Our caregivers", caregivers_path %></li>
-  <li><%= link_to "Profile", new_caregiver_path %></li>
-  <li><%= link_to "Review", reviews_path %></li>
-  <li><%= link_to "Logout", logout_path %></li>
-</ul>
-
-<% end %>

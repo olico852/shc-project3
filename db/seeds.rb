@@ -6,16 +6,10 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-Patient.create(fammember_id: 1, first_name: "Mary", last_name: "Goh", address: "123 serangoon road", gender: "female", frequency: "daily", condition_description: "bedridden")
+Patient.create(fammember_id: 5, first_name: "soemone", last_name: "Goh", address: "123 serangoon road", gender: "female", frequency: "daily", condition_description: "bedridden")
+Patient.create(fammember_id: 5, first_name: "likemary", last_name: "Goh", address: "123 serangoon road", gender: "female", frequency: "daily", condition_description: "bedridden")
 
 Patient.create(fammember_id: 2, first_name: "Lucy", last_name: "Koh", address: "103 selegie road", gender: "female", frequency: "monthly", condition_description: "stroke")
-
-User.create(first_name: "Dickson", last_name: "Goh", contact: 12345678, email: 'dicksongoh@gmail.com', password: 'keepsakes', usertype: 'Caregiver')
-User.create(first_name: "Richard", last_name: "Really", contact: 77777777, email: 'thatssad@gmail.com', password: 'wahwahwah', usertype: 'Caregiver')
-User.create(first_name: "Cinder", last_name: "Rella", contact: 12345678, email: 'fairy@gmail.com', password: 'pumpkin', usertype: 'Caregiver')
-Caregiver.create(user_id: 1, gender: 'male', certification: 'something',languages: 'new', specialties: 'signing', yearsofexperience: '8', experiencedescription: 'howhowhow', photo: 'helphelphelp')
-Caregiver.create(user_id: 2, gender: 'male', certification: 'certifed uncertified',languages: 'anglais', specialties: 'lying', yearsofexperience: '8', experiencedescription: 'meowwww', photo: 'urghhhhh')
-Caregiver.create(user_id: 7, gender: 'male', certification: 'certifed uncertified',languages: 'anglais', specialties: 'lying', yearsofexperience: '8', experiencedescription: 'meowwww', photo: 'urghhhhh')
 
 Language.create(sglang: 'Cantonese')
 Language.create(sglang: 'Chinese')

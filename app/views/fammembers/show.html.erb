@@ -76,6 +76,7 @@
 
   <tbody>
 
+
     <% @review.each do |review| %>
       <tr>
         <td><%= review.transaction_id %></td>
@@ -90,6 +91,7 @@
 </div>
 
 <%= link_to 'New Review', new_fammember_review_path(@user) %>
+
 
 <script>
   $('.star-rating').raty({

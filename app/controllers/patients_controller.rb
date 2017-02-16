@@ -1,5 +1,6 @@
 class PatientsController < ApplicationController
   before_action :set_patient, only: [:show, :edit, :update, :destroy]
+  before_action :is_authenticated_fammember, only: [:new, :update, :destroy, :edit]
 
 
   def index

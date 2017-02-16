@@ -6,10 +6,10 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-Patient.create(fammember_id: 1, first_name: "Mary", last_name: "Goh", address: "123 serangoon road", gender: "female", frequency: "daily", condition_description: "bedridden")
+Patient.create(fammember_id: 5, first_name: "soemone", last_name: "Goh", address: "123 serangoon road", gender: "female", frequency: "daily", condition_description: "bedridden")
+Patient.create(fammember_id: 5, first_name: "likemary", last_name: "Goh", address: "123 serangoon road", gender: "female", frequency: "daily", condition_description: "bedridden")
 
 Patient.create(fammember_id: 2, first_name: "Lucy", last_name: "Koh", address: "103 selegie road", gender: "female", frequency: "monthly", condition_description: "stroke")
-
 
 
 Language.create(sglang: 'Cantonese')

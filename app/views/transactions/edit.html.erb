@@ -1,0 +1,26 @@
+<h3> List of all previous transactions </h3>
+
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Name of caregiver</th>
+      <th>Family Member</th>
+      <th>Start date of booking</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <%= bootstrap_form_for @transaction do |f| %>
+    <td><%= current_user.first_name%><%= current_user.last_name%> </td>
+    <td><%= User.find_by(id: @transaction.user_id).first_name%><%= User.find_by(id: @transaction.user_id).last_name%> </td>
+    <td><%= f.text_field :start_date, value: @transaction.start_date, :readonly => 'readonly' %></td>
+    <td><%= f.collection_radio_buttons :approved , [[true, 'True'] ,[false, 'False']], :first, :last,  {:item_wrapper_class => 'inline'}  %> </td>
+
+  </tbody>
+
+</table>
+<%= f.submit %>
+
+  <% end %>

@@ -5,7 +5,7 @@
   <% else %>
     <% @search.search_caregivers.each do |c| %>
     <div class="div">
-      Language: <%= c.languages %><br>
+      Language: <%= c.language.sglang %><br>
       Id: <%= c.id %><br>
       Specialties: <%= c.specialties %><br>
       Minimum years of experience: <%= c.yearsofexperience %><br>

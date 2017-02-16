@@ -1,5 +1,8 @@
 class FammembersController < ApplicationController
   before_action :set_fammember, only: [:show, :edit, :update, :destroy]
+  before_action :is_authenticated, only: [:update, :destroy, :edit, :show ]
+  before_action :is_authenticated_fammember, only: [:update, :destroy, :edit, :show ]
+
 
   def index
   end

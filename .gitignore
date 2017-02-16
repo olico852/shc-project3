@@ -23,3 +23,14 @@ config/secrets.yml
 config/cloudinary.yml
 
 .env
+
+<div class="field">
+  <%= s.label :specialties %>
+  <%= s.collection_check_boxes(@specialties, @specialty ,:ability, :ability) %>
+</div>
+
+scope :in_languages, lambda { |*search_languages|
+  joins(:languages).where(:caregivers_languages => { :language_id => search_languages } ).uniq!.keep_if {|caregiver| caregiver.language_ids.include? search_languages[0] and caregiver.language_ids.include? search_categories[2]} }
+
+
+  Caregiver.in_languages(2,3).group_by {|caregiver| ([2,3] & caregiver.language_ids) == [2,3]}

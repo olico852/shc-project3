@@ -11,6 +11,11 @@ class PatientsController < ApplicationController
   end
 
   def new
+    @fammember = Fammember.find_by(user_id: params[:fammember_id])
+
+    # p '*' * 50
+    # p @fammember.user.first_name
+    # p '*' * 50
     @patient = Patient.new
   end
 
@@ -19,8 +24,11 @@ class PatientsController < ApplicationController
 
   def create
     @patient = Patient.new(patient_params)
-    @patient['fammember_id'] = params[:fammember_id]
-    # @patient.fammember_id = @fammember.id
+    # p '*' * 50
+    # p patient_params
+    # p '*' * 50
+
+    @patient['fammember_id'] = Fammember.find_by(user_id: params[:fammember_id]).id
       if @patient.save
         redirect_to fammembers_path, notice: "Your profile has been sucessfully created"
       else
@@ -45,9 +53,7 @@ class PatientsController < ApplicationController
     @patient = Patient.find(params[:id])
   end
 
-  # def set_fammember
-  #   @fammember = Fammember.find_by(id: current_user.id)
-  # end
+
 
   def patient_params
     params.require(:patient).permit(:first_name, :last_name, :address, :gender, :frequency, :condition_description)

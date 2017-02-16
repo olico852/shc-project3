@@ -5,9 +5,22 @@ class FammembersController < ApplicationController
 
 
   def index
+    # p '*' * 100
+    # p @user.id
+    #  @review = User.find_by(user_id: params[:fammember_id])
+    #      p '*' * 50
+    #      p User.find_by(user_id: params[:fammember_id])
+    #      p '*' * 50
   end
 
   def show
+    p '*' * 20
+    @review = Review.where(user_id: @user.id)
+
+    # p '*' * 50
+    # p @user = user.first_name
+    # p '*' * 50
+    # @review = User.find_by(user_id: params[:fammember_id])
   end
 
   def new

@@ -48,7 +48,7 @@ class TransactionsController < ApplicationController
     puts "::::"*50
     p transaction_params.inspect
     if transaction_params['approved'] == false
-      @transaction3 = Transaction.find(params[:id]).update(cancelled: true)  #got error. not working. 
+      @transaction3 = Transaction.find(params[:id]).update(cancelled: true)  #got error. not working.
     end
     redirect_to caregiver_path(current_user)
   end
@@ -71,7 +71,7 @@ private
   end
 
   def set_caregiver_email
-    # @caregiveremail = User.find_by(id: @caregiver.user_id)
+    @caregiveremail = User.find_by(id: @caregiver.user_id)
   end
 
   def transaction_params

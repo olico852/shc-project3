@@ -11,9 +11,16 @@ class ReviewsController < ApplicationController
 
 
   def new
-    @review = current_user.reviews.build()
+    if current_user.usertype == 'Caregiver'
+    @caregiver_user_id = Caregiver.find_by(user_id: current_user.id).id
+    @transaction_id = Transaction.find_by(caregiver_id: @caregiver_user_id).id
+    p '8'*50
+    p @transaction_id
+    p '8'*50
+    elsif current_user.usertype == 'Fammember'
     @transaction_id = Transaction.find_by(user_id: current_user.id).id
-
+    end
+    @review = current_user.reviews.build()
   end
 
 
@@ -22,8 +29,12 @@ class ReviewsController < ApplicationController
 
   def create
     @review = current_user.reviews.build(review_params)
+    if current_user.usertype == 'Caregiver'
+    @caregiver_user_id = Caregiver.find_by(user_id: current_user.id).id
+    @review['transaction_id'] = Transaction.find_by(caregiver_id: @caregiver_user_id).id
+    elsif current_user.usertype == 'Fammember'
     @review['transaction_id'] = Transaction.find_by(user_id: current_user.id).id
-
+    end
     if @review.save
       flash[:success] = "Review created!"
       if current_user.usertype == 'Caregiver'

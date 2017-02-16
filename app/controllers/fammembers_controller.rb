@@ -13,15 +13,11 @@ class FammembersController < ApplicationController
     @review = Review.where(user_id: @user.id)
     @fammember = Fammember.find_by(user_id: params[:id])
     @patient = Patient.where(fammember_id: @fammember.id)
-    puts '*'*50
-    puts @patient.inspect
-    puts '*'*50
-    # @patient = Patient.find_by(user_id: params[:id])
-    #
-    # p '*' * 50
-    # p @patient
-    # p '*' * 50
-    # @review = User.find_by(user_id: params[:fammember_id])
+    # p '*' * 100
+    # p @transaction_caregiver = Transaction.find_by(user_id: current_user.id).caregiver_id
+    # p @caregivers = Caregiver.find_by(id: @transaction_caregiver).user_id
+    # p @caregivers_name = User.find_by(id: @caregivers).first_name
+    # p '*' * 100
   end
 
   def new
@@ -32,14 +28,16 @@ class FammembersController < ApplicationController
   def create
     @user = User.new(fammember_params)
       if @user.save
-        UserMailer.welcome_email(@user).deliver
+        # UserMailer.welcome_email(@user).deliver
         @fammember = Fammember.new
         @fammember.user_id = @user.id
         if @fammember.save
-          redirect_to login_path, notice: "Your profile has been sucessfully created, please log in."
+          flash[:success] = "Your profile has been sucessfully created"
+          redirect_to login_path
         end
       else
-        redirect_to :back, notice: "Error..."
+        flash[:failure] = "Error..."
+        redirect_to :back
     end
   end
 
@@ -53,15 +51,14 @@ class FammembersController < ApplicationController
 
   def destroy
     @user.destroy
-    # @fammember = Fammember.destroy
-    redirect_to '/', notice: "Your profile was successfully destroyed"
+    flash[:success] = "account has been successfully deleted."
+    redirect_to '/'
   end
 
   private
 
   def set_fammember
     @user = User.find(params[:id])
-    # @fammember = Fammember.find(user_id: params[:id])
   end
 
   def fammember_params

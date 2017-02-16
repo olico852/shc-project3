@@ -10,12 +10,7 @@ Patient.create(fammember_id: 1, first_name: "Mary", last_name: "Goh", address: "
 
 Patient.create(fammember_id: 2, first_name: "Lucy", last_name: "Koh", address: "103 selegie road", gender: "female", frequency: "monthly", condition_description: "stroke")
 
-User.create(first_name: "Dickson", last_name: "Goh", contact: 12345678, email: 'dicksongoh@gmail.com', password: 'keepsakes', usertype: 'Caregiver')
-User.create(first_name: "Richard", last_name: "Really", contact: 77777777, email: 'thatssad@gmail.com', password: 'wahwahwah', usertype: 'Caregiver')
-User.create(first_name: "Cinder", last_name: "Rella", contact: 12345678, email: 'fairy@gmail.com', password: 'pumpkin', usertype: 'Caregiver')
-Caregiver.create(user_id: 1, gender: 'male', certification: 'something',languages: 'new', specialties: 'signing', yearsofexperience: '8', experiencedescription: 'howhowhow', photo: 'helphelphelp')
-Caregiver.create(user_id: 2, gender: 'male', certification: 'certifed uncertified',languages: 'anglais', specialties: 'lying', yearsofexperience: '8', experiencedescription: 'meowwww', photo: 'urghhhhh')
-Caregiver.create(user_id: 7, gender: 'male', certification: 'certifed uncertified',languages: 'anglais', specialties: 'lying', yearsofexperience: '8', experiencedescription: 'meowwww', photo: 'urghhhhh')
+
 
 Language.create(sglang: 'Cantonese')
 Language.create(sglang: 'Chinese')
@@ -52,6 +47,7 @@ Fammember.create(user_id: 4)
 Fammember.create(user_id: 5)
 Fammember.create(user_id: 6)
 
+Transaction.create(user_id: 18, caregiver_id: 8, pending: true, approved: false, cancelled: false, concluded: false)
 # User.second.update(first_name: "Realname", last_name: "Name", contact: 88888888, email: 'realname@gmail.com', password: 'lieslieslies')
 # User.second.caregiver.update(gender: 'female', certification: 'something',languages: 'new', yearsofexperience: '8', experiencedescription: 'howhowhow', photo: 'helphelphelp')
 # Caregiver.update(user_id: 2, gender: 'unknownnnnn', certification: 'something',languages: 'new', yearsofexperience: '8', experiencedescription: 'howhowhow', photo: 'helphelphelp')

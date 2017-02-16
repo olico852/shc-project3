@@ -11,9 +11,6 @@
       <th>Review</th>
       <th>Rating</th>
       <th>User</th>
-
-
-      <th colspan="3"></th>
     </tr>
   </thead>
 
@@ -35,8 +32,8 @@
 <br>
 
 <h1>List of Patients</h1>
-
-<table>
+<div class="container">
+<table class="table table-bordered">
   <thead>
     <tr>
       <th>first_name</th>
@@ -46,7 +43,6 @@
       <th>frequency</th>
       <th>condition_description</th>
 
-      <th colspan="3"></th>
     </tr>
   </thead>
 
@@ -63,11 +59,37 @@
     <% end %>
   </tbody>
 </table>
+</div>
 
 
+<h5>Review</h5>
+<div class="row">
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th class="col-xs-1">transaction_id</th>
+      <th class="col-xs-2">Rating</th>
+      <th class="col-xs-4">Comment</th>
+      <th colspan="3">Functions</th>
+    </tr>
+  </thead>
 
+  <tbody>
 
-<%= link_to 'New Review', new_review_path %>
+    <% @review.each do |review| %>
+      <tr>
+        <td><%= review.transaction_id %></td>
+        <td><div class = "star-rating" data-score= <%= review.rating %></div></td>
+        <td><%= review.comment %></td>
+        <td><%= link_to 'Edit', edit_fammember_review_path(review.user_id,review.id) %>
+      <%= link_to 'Destroy', fammember_review_path(review.user_id,review.id) , method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
+
+<%= link_to 'New Review', new_fammember_review_path(@user) %>
 
 <script>
   $('.star-rating').raty({

@@ -5,13 +5,15 @@ Rails.application.routes.draw do
 
   resources :fammembers do
     resources :patients, only: [:new, :create, :show, :edit, :delete]
+    resources :reviews
   end
 
-  resources :reviews
 
+resources :reviews
 
   resources :caregivers do
     resources :transactions
+    resources :reviews
   end
 
 

@@ -3,8 +3,8 @@ class CreateReviews < ActiveRecord::Migration[5.0]
     create_table :reviews do |t|
       t.string :comment
       t.integer :rating
-      t.string :usertype
       t.integer :user_id
+      t.integer :transaction_id
 
       t.timestamps
     end

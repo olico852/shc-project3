@@ -10,8 +10,18 @@ class ReviewsController < ApplicationController
 
 
   def new
-    @review = current_user.reviews.build(usertype: current_user.usertype)
+    # @review = current_user.reviews.build(usertype: current_user.usertype)
+    # @review = current_user.reviews.build()
 
+      @review = current_user.reviews.build()
+      @transaction_id = Transaction.find_by(user_id: current_user.id).id
+
+
+    # @review = Review.find_by(user_id: current_user.id)
+    # @transaction_id = Transaction.find_by(user_id: current_user.id).id
+    # p '*' * 100
+    # p 'review'
+    # @caregiver = Caregiver.find_by(user_id: params[:fammember_id])
   end
 
 
@@ -20,9 +30,20 @@ class ReviewsController < ApplicationController
 
   def create
     @review = current_user.reviews.build(review_params)
+    @review['transaction_id'] = Transaction.find_by(user_id: current_user.id).id
+    # p '*' * 50
+    # p review_params
+    # p @review
+    # p '*' * 50
 
     if @review.save
-      redirect_to reviews_path, notice: "Your profile has been sucessfully created"
+      flash[:success] = "Review created!"
+      if current_user.usertype == 'Caregiver'
+        redirect_to caregiver_path(current_user.id) and return
+      elsif current_user.usertype == 'Fammember'
+        redirect_to fammember_path(current_user.id) and return
+      end
+      # redirect_to :back, notice: "Your profile has been sucessfully created"
       # format.html { redirect_to @review, notice: 'Review was successfully created.' }
     else
       redirect_to :back, notice: "Error..."
@@ -30,25 +51,31 @@ class ReviewsController < ApplicationController
     end
   end
 
-
-
   def update
-    respond_to do |format|
+    
       if @review.update(review_params)
-        format.html { redirect_to @review, notice: 'Review was successfully updated.' }
+        flash[:success] = "Review created!"
+        if current_user.usertype == 'Caregiver'
+          redirect_to caregiver_path(current_user.id) and return
+        elsif current_user.usertype == 'Fammember'
+          redirect_to fammember_path(current_user.id) and return
+        end
 
       else
-        format.html { render :edit }
+        redirect_to :back, notice: "Error..."
 
       end
-    end
+
   end
 
 
   def destroy
     @review.destroy
-    respond_to do |format|
-      format.html { redirect_to reviews_url, notice: 'Review was successfully destroyed.' }
+    flash[:success] = "Review destroy!"
+    if current_user.usertype == 'Caregiver'
+      redirect_to caregiver_path(current_user.id) and return
+    elsif current_user.usertype == 'Fammember'
+      redirect_to fammember_path(current_user.id) and return
 
     end
   end

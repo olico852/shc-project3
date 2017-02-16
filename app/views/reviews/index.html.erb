@@ -7,7 +7,6 @@
     <tr>
       <th>Comment</th>
       <th>Rating</th>
-      <th>User type</th>
       <th>User</th>
 
       <th colspan="3"></th>
@@ -19,7 +18,6 @@
       <tr>
         <td><%= review.comment %></td>
         <td><div class = "star-rating" data-score= <%= review.rating %></div></td>
-        <td><%= review.usertype %></td>
         <td><%= review.user_id %></td>
         <td><%= link_to 'Show', review %></td>
         <td><%= link_to 'Edit', edit_review_path(review) %></td>

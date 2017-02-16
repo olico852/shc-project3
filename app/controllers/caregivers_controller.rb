@@ -14,10 +14,13 @@ class CaregiversController < ApplicationController
   def show
       if current_user.usertype === "Caregiver"
        @caregiver = Caregiver.find_by(user_id: params[:id])
+      #  p 'x' * 100
+      #  p @caregiver.gender
+      #  p 'x' * 100
        @review = Review.where(user_id: current_user.id)
-       p '*' * 50
-       p @review
-       p '*' * 50
+      #  p '*' * 50
+      #  p @review
+      #  p '*' * 50
      elsif current_user.usertype === "Fammember"
        @caregiver = Caregiver.find_by(id: params[:id])
     end

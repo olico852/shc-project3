@@ -5,20 +5,21 @@ class FammembersController < ApplicationController
 
 
   def index
-    # p '*' * 100
-    # p @user.id
-    #  @review = User.find_by(user_id: params[:fammember_id])
-    #      p '*' * 50
-    #      p User.find_by(user_id: params[:fammember_id])
-    #      p '*' * 50
+
   end
 
   def show
-    p '*' * 20
-    @review = Review.where(user_id: @user.id)
 
+    @review = Review.where(user_id: @user.id)
+    @fammember = Fammember.find_by(user_id: params[:id])
+    @patient = Patient.where(fammember_id: @fammember.id)
+    puts '*'*50
+    puts @patient.inspect
+    puts '*'*50
+    # @patient = Patient.find_by(user_id: params[:id])
+    #
     # p '*' * 50
-    # p @user = user.first_name
+    # p @patient
     # p '*' * 50
     # @review = User.find_by(user_id: params[:fammember_id])
   end
@@ -59,7 +60,7 @@ class FammembersController < ApplicationController
 
   def set_fammember
     @user = User.find(params[:id])
-    # @fammember = Fammember.find(params[:id])
+    # @fammember = Fammember.find(user_id: params[:id])
   end
 
   def fammember_params

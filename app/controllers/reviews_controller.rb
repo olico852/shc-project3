@@ -52,9 +52,9 @@ class ReviewsController < ApplicationController
   end
 
   def update
-    
+
       if @review.update(review_params)
-        flash[:success] = "Review created!"
+        flash[:success] = "Review updated!"
         if current_user.usertype == 'Caregiver'
           redirect_to caregiver_path(current_user.id) and return
         elsif current_user.usertype == 'Fammember'
@@ -67,7 +67,6 @@ class ReviewsController < ApplicationController
       end
 
   end
-
 
   def destroy
     @review.destroy

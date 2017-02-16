@@ -1,7 +1,6 @@
 class PatientsController < ApplicationController
   before_action :set_patient, only: [:show, :edit, :update, :destroy]
-  # before_action :set_fammember, only: [:new, :show, :create]
-  before_action :is_authenticated
+
 
   def index
     @patients = Patient.all
@@ -13,9 +12,6 @@ class PatientsController < ApplicationController
   def new
     @fammember = Fammember.find_by(user_id: params[:fammember_id])
 
-    # p '*' * 50
-    # p @fammember.user.first_name
-    # p '*' * 50
     @patient = Patient.new
   end
 
@@ -30,9 +26,15 @@ class PatientsController < ApplicationController
 
     @patient['fammember_id'] = Fammember.find_by(user_id: params[:fammember_id]).id
       if @patient.save
-        redirect_to fammembers_path, notice: "Your profile has been sucessfully created"
+        puts '*'*50
+        puts @fammember.inspect
+        puts '*'*50
+        flash[:success] = "Your patient has been sucessfully created"
+        redirect_to fammember_path(current_user.id)
+
       else
-        redirect_to :back, notice: "Error..."
+        flash[:danger] = "Error..."
+        redirect_to :back
       end
   end
 

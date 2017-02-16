@@ -13,10 +13,13 @@ class CaregiversController < ApplicationController
   def show
       if current_user.usertype === "Caregiver"
        @caregiver = Caregiver.find_by(user_id: params[:id])
+      #  p 'x' * 100
+      #  p @caregiver.gender
+      #  p 'x' * 100
        @review = Review.where(user_id: current_user.id)
-       p '*' * 50
-       p @review
-       p '*' * 50
+      #  p '*' * 50
+      #  p @review
+      #  p '*' * 50
      elsif current_user.usertype === "Fammember"
        @caregiver = Caregiver.find_by(id: params[:id])
     end
@@ -36,10 +39,12 @@ class CaregiversController < ApplicationController
         @caregiver.user_id = @user.id
             upload
       if @caregiver.save
-        redirect_to login_path, flash[:success] = "Your profile has been sucessfully created"
+        flash[:success] = "Your profile has been sucessfully created"
+        redirect_to login_path
       else
         @user.destroy if @user.save
-        redirect_to :back, flash[:failure] = "Error..."
+        flash[:failure] = "Error..."
+        redirect_to :back
       end
     end
   end

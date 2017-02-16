@@ -6,13 +6,24 @@ class Search < ApplicationRecord
   #   return languages
   # end
 
-  def search_caregiver_languages
-    puts "HELLO" * 80
-    puts params
-
-    # languages = Language.all
-    languages = languages.where(['languages = ?', languages]) if languages.present?
-    caregivers = languages.caregivers
-   return caregivers
+  # Functions that belong to every instance
+  def search_caregivers_languages
+    p 'hello' * 150
+    p self.language
+    language = Language.where(sglang: self.language) if self.language.present?
   end
+
+  def search_caregivers_specialties
+    p 'BYE' * 150
+    p self.specialties
+    specialties = Specialty.where(ability: self.specialties) if self.specialties.present?
+  end
+
+    def search_caregivers_attributes
+      caregivers = Caregiver.all
+      caregivers = caregivers.where(gender: self.gender) if gender.present?
+      caregivers = caregivers.where(yearsofexperience: self.yearsofexperience) if yearsofexperience.present?
+      return caregivers
+    end
+
 end

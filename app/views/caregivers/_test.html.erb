@@ -1,0 +1,31 @@
+<h1>All our caregivers</h1>
+<table>
+  <thead>
+    <tr>
+      <th class="col-xs-2">ID</th>
+      <th class="col-xs-2">User ID</th>
+      <th class="col-xs-2">Email</th>
+      <th class="col-xs-2">Gender</th>
+      <th class="col-xs-2">Years of experience</th>
+      <th class="col-xs-2">Expertise</th>
+      <th class="col-xs-2">Experience description</th>
+      <th class="col-xs-2">Languages Spoken</th>
+      <th class="col-xs-2">Book Now</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <% @caregivers.each do |c| %>
+        <td><%= c.id %></td>
+        <td><%= c.user_id %></td>
+        <td><%= User.find_by(id: c.user_id).email %></td>
+        <td><%= c.gender %></td>
+        <td><%= c.yearsofexperience %></td>
+        <td><%= c.specialties %></td>
+        <td><%= c.experiencedescription %></td>
+        <td><%= c.languages %></td>
+        <td><%= link_to "Book Now", new_caregiver_transaction_path(c.id) %></td>
+    </tr>
+      <% end %>
+  </tbody>
+</table>

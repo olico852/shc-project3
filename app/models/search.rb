@@ -1,12 +1,18 @@
 class Search < ApplicationRecord
-  def search_caregivers
+  # def get_caregiver_languages(id)
+  #   caregiver = Caregiver.find(id)
+  #   languages = caregiver.languages
+  #
+  #   return languages
+  # end
 
-    caregivers = Caregiver.all
-    caregivers = Caregiver.where('id IN (SELECT DISTINCT caregiver_id FROM caregivers_languages WHERE language_id = languages.find_by(sglang))')
-    caregivers = Caregiver.joins(:specialties).where(["specialty.ability LIKE?", ability]) if specialties.present?
-    caregivers = caregivers.where(["yearsofexperience >= ?", yearsofexperience]) if yearsofexperience.present?
-    caregivers = caregivers.where(["gender LIKE ?", gender]) if gender.present?
+  def search_caregiver_languages
+    puts "HELLO" * 80
+    puts params
 
-    return caregivers
+    # languages = Language.all
+    languages = languages.where(['languages = ?', languages]) if languages.present?
+    caregivers = languages.caregivers
+   return caregivers
   end
 end

@@ -1,11 +1,11 @@
 <h1>Search Results</h1>
 
-  <% if @search.search_caregivers.empty? %>
+  <% if @search.search_caregiver_languages.empty? %>
     <p>No records found</p>
   <% else %>
-    <% @search.search_caregivers.each do |c| %>
+    <% @search.search_caregivers_languages.each do |c| %>
     <div class="div">
-      Language: <%= c.language.sglang %><br>
+      Language: <%= c.language %><br>
       Id: <%= c.id %><br>
       Specialties: <%= c.specialties %><br>
       Minimum years of experience: <%= c.yearsofexperience %><br>

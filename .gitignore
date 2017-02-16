@@ -24,6 +24,10 @@ config/cloudinary.yml
 
 .env
 
+<<<<<<< HEAD
+# Ignore application configuration
+/config/application.yml
+=======
 <div class="field">
   <%= s.label :specialties %>
   <%= s.collection_check_boxes(@specialties, @specialty ,:ability, :ability) %>
@@ -34,3 +38,4 @@ scope :in_languages, lambda { |*search_languages|
 
 
   Caregiver.in_languages(2,3).group_by {|caregiver| ([2,3] & caregiver.language_ids) == [2,3]}
+>>>>>>> 76dc65b0c10b1fad123cbd9cadb60abc7729b6c2

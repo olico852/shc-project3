@@ -4,7 +4,7 @@ class Caregiver < ApplicationRecord
   has_and_belongs_to_many :specialties
   after_initialize :defaultVal
 
-  attr_accessor :email, :password, :languages, :specialties
+  # attr_accessor :email, :password, :languages, :specialties... don't add this as there's conflict with rails in-built accessor methods,
 
   validates :gender, presence: true
   validates :yearsofexperience, presence: true

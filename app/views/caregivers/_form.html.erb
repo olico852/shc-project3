@@ -33,11 +33,11 @@
   </div>
 
   <div>
-    <%= f.collection_check_boxes(:language_ids, Language.all, :id, :sglang) %>
+    <%= f.collection_check_boxes(:language_ids, Language.all, :id, :sglang,  {:label => 'Language'}) %>
   </div>
 
   <div>
-    <%= f.collection_check_boxes(:specialty_ids, Specialty.all, :id, :ability) %>
+    <%= f.collection_check_boxes(:specialty_ids, Specialty.all, :id, :ability, {:label => 'Specialty'}) %>
   </div>
 
   <div>

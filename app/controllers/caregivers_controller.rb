@@ -37,10 +37,12 @@ class CaregiversController < ApplicationController
         @caregiver.user_id = @user.id
             upload
       if @caregiver.save
-        redirect_to login_path, flash[:success] = "Your profile has been sucessfully created"
+        flash[:success] = "Your profile has been sucessfully created"
+        redirect_to login_path
       else
         @user.destroy if @user.save
-        redirect_to :back, flash[:failure] = "Error..."
+        flash[:failure] = "Error..."
+        redirect_to :back
       end
     end
   end

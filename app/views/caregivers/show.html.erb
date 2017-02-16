@@ -1,30 +1,46 @@
-<h1>Welcome to caregiver profile</h1>
-<table>
+<h1>Welcome <%=current_user.first_name%></h1>
+  <% User.find_by(id: params[:id]).email %>
+
+<div class="container">
+<h5>Your Profile</h5>
+  <div class="row">
+<table class="table table-bordered">
   <thead>
     <tr>
-      <th class="col-xs-2">Name</th>
-      <th class="col-xs-2">Gender</th>
-      <th class="col-xs-2">Years of experience</th>
-      <th class="col-xs-2">Expertise</th>
-      <th class="col-xs-2">Experience description</th>
-      <th class="col-xs-2">Languages Spoken</th>
+      <th class="col-xs-1">Name</th>
+      <th class="col-xs-1">Gender</th>
+      <th class="col-xs-1">Years of experience</th>
+      <th class="col-xs-3">Expertise</th>
+      <th class="col-xs-3">Experience description</th>
+      <th class="col-xs-3">Languages Spoken</th>
       <th class="col-xs-2">Book now</th>
     </tr>
   </thead>
+
   <tbody>
     <tr>
       <% if current_user.usertype === "Caregiver" %>
       <td><%= User.find_by(id: params[:id]).first_name %></td>
-      <td><%= User.find_by(id: params[:id]).email %></td>
       <td><%= @caregiver.gender %></td>
       <td><%= @caregiver.yearsofexperience %></td>
-      <td><%= @caregiver.specialties %></td>
+      <td>
+        <ul><% @caregiver.specialties.each do |x| %>
+          <li><%=x.ability%></li>
+          <% end %>
+        </ul>
+      </td>
       <td><%= @caregiver.experiencedescription %></td>
-      <td><%= @caregiver.languages %></td>
+      <td>
+        <ul><% @caregiver.languages.each do |x| %>
+          <li><%= x.sglang %></li>
+          <% end %>
+        </ul>
+      </td>
       <td><%= link_to "View transaction", new_caregiver_transaction_path(@caregiver) %></td>
+
       <% elsif current_user.usertype === "Fammember" %>
+      <%= User.find_by(id: Caregiver.find_by(id: params[:id]).user_id).email %>
       <td><%= User.find_by(id: Caregiver.find_by(id: params[:id]).user_id).first_name %></td>
-      <td><%= User.find_by(id: Caregiver.find_by(id: params[:id]).user_id).email %></td>
       <td><%= @caregiver.gender %></td>
       <td><%= @caregiver.yearsofexperience %></td>
       <td><%= @caregiver.specialties %></td>
@@ -36,15 +52,21 @@
   </tbody>
 </table>
 
-<table>
+</div>
+
+<div class="row">
+</div>
+<h5>Comments</h5>
+<div class="row">
+<table class="table table-bordered">
   <thead>
     <tr>
-      <th>Comment</th>
-      <th>Rating</th>
-      <th>User</th>
-      <th>transaction_id</th>
+      <th class="col-xs-2">Rating</th>
+      <th class="col-xs-4">Comment</th>
+      <th class="col-xs-2">User</th>
+      <th class="col-xs-1">transaction_id</th>
 
-      <th colspan="3"></th>
+      <th colspan="3">Functions</th>
     </tr>
   </thead>
 
@@ -52,19 +74,19 @@
 
     <% @review.each do |review| %>
       <tr>
-        <td><%= review.comment %></td>
         <td><div class = "star-rating" data-score= <%= review.rating %></div></td>
+        <td><%= review.comment %></td>
         <td><%= review.user_id %></td>
         <td><%= review.transaction_id %></td>
-        <td><%= link_to 'Edit', edit_caregiver_review_path(review.user_id,review.id) %></td>
-        <td><%= link_to 'Destroy', caregiver_review_path(review.user_id,review.id) , method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Edit', edit_caregiver_review_path(review.user_id,review.id) %>
+      <%= link_to 'Destroy', caregiver_review_path(review.user_id,review.id) , method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-
-
+</div>
+</div>
 
 
 <%= link_to 'New Review', new_caregiver_review_path(@user) %>

@@ -1,5 +1,6 @@
 class CaregiversController < ApplicationController
   before_action :set_caregiver, only: [:show, :edit, :update, :destroy]
+  before_action :is_authenticated, only: [:search, :update, :delete, :edit, :show ]
 
   def index
     # @caregivers = Caregiver.search(params[:search])
@@ -33,9 +34,7 @@ class CaregiversController < ApplicationController
       if @user.save
         @caregiver = Caregiver.new(caregiver_params)
         @caregiver.user_id = @user.id
-
             upload
-
       if @caregiver.save
         redirect_to login_path, notice: "Your profile has been sucessfully created"
       else

@@ -1,6 +1,7 @@
 class TransactionsController < ApplicationController
   before_action :set_transaction, only: [:show, :edit, :update, :destroy]
   before_action :set_caregiver, only: [:show, :new, :create]
+  
 
   def index
     if current_user.usertype === "Fammember"

@@ -2,9 +2,9 @@ class SearchesController < ApplicationController
 
   def new
     @search = Search.new
-    @specialty = Caregiver.uniq.pluck(:specialties)
     @genders = Caregiver.uniq.pluck(:gender)
-    @lang = Caregiver.uniq.pluck(:languages)
+    @specialty = Specialty.uniq.pluck(:ability)
+    @lang = Language.uniq.pluck(:sglang)
   end
 
   def create
@@ -14,10 +14,11 @@ class SearchesController < ApplicationController
 
   def show
     @search = Search.find(params[:id])
+    puts @search
   end
 
   private
   def search_params
-    params.require(:search).permit(:name, :languages, :specialties, :yearsofexperience, :gender)
+    params.require(:search).permit(:name, :sglang, :specialties, :yearsofexperience, :gender)
   end
 end

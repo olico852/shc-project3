@@ -1,8 +1,42 @@
 <h1>Welcome <%=current_user.first_name%></h1>
-  <% User.find_by(id: params[:id]).email %>
 
 <div class="container">
-<h5>Your Profile</h5>
+
+<center><h4>Your bookings</h4></center>
+<div class="row">
+<table class="table table-bordered">
+<thead>
+  <tr>
+    <th class="col-xs-3">Name of caregiver</th>
+    <th class="col-xs-3">Family Member</th>
+    <th class="col-xs-3">Start date of booking</th>
+    <th class="col-xs-3">Status</th>
+  </tr>
+</thead>
+
+<tbody>
+  <tr>
+    <% if current_user.usertype === "Caregiver" %>
+    <td><%= User.find_by(id: params[:id]).first_name %><%= User.find_by(id: params[:id]).last_name %></td>
+    <td><%= User.find_by(id: @transaction.user_id).first_name %> <%= User.find_by(id: @transaction.user_id).last_name %></td>
+    <td><%= @transaction.start_date %></td>
+    <td>
+      <ul>
+        <li>Pending: <%= @transaction.pending %></li>
+        <li>Approved: <%= @transaction.approved %></li>
+        <li>Cancelled: <%= @transaction.approved %></li>
+        <li>Concluded: <%= @transaction.approved %></li>
+      </ul>
+    </td>
+  </tr>
+</tbody>
+</table>
+<% end %>
+</div>
+<br>
+<br>
+
+<center><h4>Your Profile</h4></center>
   <div class="row">
 <table class="table table-bordered">
   <thead>
@@ -54,8 +88,9 @@
 
 </div>
 
-
-<h5>Review</h5>
+<br>
+<br> 
+<center><h4>Review</h4></center>
 <div class="row">
 <table class="table table-bordered">
   <thead>

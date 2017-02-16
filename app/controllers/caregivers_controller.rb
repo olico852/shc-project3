@@ -14,12 +14,13 @@ class CaregiversController < ApplicationController
       if current_user.usertype === "Caregiver"
         p "T" *100
         p params
-       @caregiver = Caregiver.find_by(user_id: params[:id])
+       @caregiver = Caregiver.find_by!(user_id: params[:id])
        @review = Review.where(user_id: current_user.id)
        p '*' * 100
-       p @transaction_caregiver = Transaction.find_by(user_id: current_user.id).caregiver_id
-       p @caregivers = Caregiver.find_by(id: @transaction_caregiver).user_id
-       p @caregivers_name = User.find_by(id: @caregivers).first_name
+      @transaction = Transaction.find_by!(caregiver_id: @caregiver.id)
+      p @transaction
+      #  @caregivers = Caregiver.find_by!(id: @transaction)
+      #  @caregivers_name = User.find_by!(id: @caregivers)
        p '*' * 100
      elsif current_user.usertype === "Fammember"
        @caregiver = Caregiver.find_by(id: params[:id])

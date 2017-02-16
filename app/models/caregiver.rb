@@ -4,7 +4,6 @@ class Caregiver < ApplicationRecord
   has_and_belongs_to_many :specialties
   after_initialize :defaultVal
 
-  attr_accessor :email, :password, :languages, :specialties
 
   validates :gender, presence: true
   validates :yearsofexperience, presence: true

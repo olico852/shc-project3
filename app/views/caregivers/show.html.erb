@@ -15,14 +15,16 @@
     <tr>
       <% if current_user.usertype === "Caregiver" %>
       <td><%= User.find_by(id: params[:id]).first_name %></td>
+      <td><%= User.find_by(id: params[:id]).email %></td>
       <td><%= @caregiver.gender %></td>
       <td><%= @caregiver.yearsofexperience %></td>
       <td><%= @caregiver.specialties %></td>
       <td><%= @caregiver.experiencedescription %></td>
       <td><%= @caregiver.languages %></td>
-      <td><%= link_to "Book Now", new_caregiver_transaction_path(@caregiver) %></td>
+      <td><%= link_to "View transaction", new_caregiver_transaction_path(@caregiver) %></td>
       <% elsif current_user.usertype === "Fammember" %>
       <td><%= User.find_by(id: Caregiver.find_by(id: params[:id]).user_id).first_name %></td>
+      <td><%= User.find_by(id: Caregiver.find_by(id: params[:id]).user_id).email %></td>
       <td><%= @caregiver.gender %></td>
       <td><%= @caregiver.yearsofexperience %></td>
       <td><%= @caregiver.specialties %></td>

@@ -1,6 +1,7 @@
 class TransactionsController < ApplicationController
   before_action :set_transaction, only: [:show, :edit, :update, :destroy]
   before_action :set_caregiver, only: [:show, :new, :create]
+  before_action :set_caregiver_email, only: [:show, :new, :create]
 
   def index
     if current_user.usertype === "Fammember"
@@ -20,14 +21,13 @@ class TransactionsController < ApplicationController
     @transaction.user_id = current_user.id
     @transaction.caregiver_id = @caregiver.id
     if @transaction.save
+      UserMailer.fammember_transaction_email(current_user).deliver
+      UserMailer.caregiver_transaction_email(@caregiveremail).deliver
       redirect_to root_path, notice: 'Thank you for booking with us.'
     else
       render :new
     end
   end
-
-  # transaction = Transaction.create!(user_id: 3, caregiver_id: 6, pending: true, approved: false, concluded: false, start_date: '2012-12-12', cancelled: false)
-
 
   def edit
   end
@@ -49,6 +49,10 @@ private
 
   def set_caregiver
     @caregiver = Caregiver.find_by(id: params[:caregiver_id])
+  end
+
+  def set_caregiver_email
+    @caregiveremail = User.find_by(id: @caregiver.user_id)
   end
 
   def transaction_params

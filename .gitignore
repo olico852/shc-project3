@@ -23,3 +23,6 @@ config/secrets.yml
 config/cloudinary.yml
 
 .env
+
+# Ignore application configuration
+/config/application.yml

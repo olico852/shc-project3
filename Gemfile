@@ -19,7 +19,10 @@ gem 'bcrypt', '3.1.11', :require => 'bcrypt'
 gem 'bootstrap_form'
 gem 'cloudinary'
 gem 'wdm', '>= 0.1.0' if Gem.win_platform?
-
+gem 'mail', '~> 2.6', '>= 2.6.4'
+gem "figaro"
+gem 'mailgun-ruby', '~>1.0.2', require: 'mailgun'
+gem 'mailgun_rails'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri

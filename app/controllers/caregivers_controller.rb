@@ -3,6 +3,7 @@ class CaregiversController < ApplicationController
 
   def index
     # @caregivers = Caregiver.search(params[:search])
+    @caregivers = Caregiver.all
   end
 
   def search

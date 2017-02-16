@@ -7,13 +7,14 @@
 </div>
 
 <div class="field">
-  <%= s.label :languages %>
-  <%= s.select :languages, options_for_select(@lang), :include_blank => true %>
+  <%= s.label :language %>
+  <%= s.select :language, options_for_select(@lang), :include_blank => true %>
 </div>
 
 
 <div class="field">
-  <%= s.label :yearsofexperience %> - <%= s.text_field :yearsofexperience, size: 10 %>
+  <%= s.label :yearsofexperience %>
+  <%= s.text_field :yearsofexperience, size: 10 %>
 </div>
 
 <div class="field">

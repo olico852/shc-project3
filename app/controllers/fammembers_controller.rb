@@ -32,6 +32,7 @@ class FammembersController < ApplicationController
   def create
     @user = User.new(fammember_params)
       if @user.save
+        UserMailer.welcome_email(@user).deliver
         @fammember = Fammember.new
         @fammember.user_id = @user.id
         if @fammember.save

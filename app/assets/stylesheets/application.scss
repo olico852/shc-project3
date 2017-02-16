@@ -17,6 +17,21 @@ $navbar-default-bg: #40DAAE;
  @import "bootstrap";
  @import "home.scss";
 
+@font-face {
+  font-family: 'Myriad Pro Regular';
+  src: url(asset-path('fonts/MYRIADPRO-REGULAR.OTF')) format('otf'),
+       url(asset-path('fonts/MYRIADPRO-REGULAR.OTF')) format('otf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Myriad Pro Bold';
+  src: url(asset-path('fonts/MYRIADPRO-BOLD.OTF')) format('otf'),
+       url(asset-path('fonts/MYRIADPRO-BOLDCOND.OTF')) format('otf'),
+       url(asset-path('fonts/MYRIADPRO-BOLDCONDIT.OTF')) format('otf'),
+       url(asset-path('fonts/MYRIADPRO-BOLDIT.OTF')) format('otf');
+}
 
 .navbar {
   background-color : $navbar-default-bg;
@@ -123,7 +138,7 @@ button {
    float: left;
    margin-left: 15px;
  }
- // 
+ //
  // body {
  //   background-image: image-url('backgroundImage.jpg');
  //   background-repeat: no-repeat;

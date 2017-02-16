@@ -1,5 +1,5 @@
 class SearchesController < ApplicationController
-  before_action :compilerandcheck, only: :show
+  before_action :is_authenticated, only: [:update, :delete, :edit ]
 
   def new
     @search = Search.new
@@ -24,7 +24,4 @@ class SearchesController < ApplicationController
     params.require(:search).permit(:name, :language, :specialties, :yearsofexperience, :gender)
   end
 
-  def compilerandcheck
-
-  end
 end

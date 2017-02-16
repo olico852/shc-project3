@@ -12,26 +12,26 @@ class CaregiversController < ApplicationController
 
   def show
       if current_user.usertype === "Caregiver"
-<<<<<<< HEAD
 
-       @caregiver = Caregiver.find_by(user_id: params[:id])
-       @review = Review.where(user_id: current_user.id)
-       p '*' * 100
-      #  p Transaction.
-      #  p @transaction_caregiver = Transaction.find_by(user_id: current_user.id).caregiver_id
-      #  p @caregivers = Caregiver.find_by(id: @transaction_caregiver).user_id
-      #  p @caregivers_name = User.find_by(id: @caregivers).first_name
-=======
+
+      #  @caregiver = Caregiver.find_by(user_id: params[:id])
+      #  @review = Review.where(user_id: current_user.id)
+      #  p '*' * 100
+      # #  p Transaction.
+      # #  p @transaction_caregiver = Transaction.find_by(user_id: current_user.id).caregiver_id
+      # #  p @caregivers = Caregiver.find_by(id: @transaction_caregiver).user_id
+      # #  p @caregivers_name = User.find_by(id: @caregivers).first_name
+
         p "T" *100
         p params
        @caregiver = Caregiver.find_by!(user_id: params[:id])
        @review = Review.where(user_id: current_user.id)
        p '*' * 100
-      @transaction = Transaction.find_by!(caregiver_id: @caregiver.id)
+      @transaction = Transaction.where(caregiver_id: @caregiver.id)
       p @transaction
       #  @caregivers = Caregiver.find_by!(id: @transaction)
       #  @caregivers_name = User.find_by!(id: @caregivers)
->>>>>>> 1299fc50a854fbada6e1885158124d2a7a70edf0
+
        p '*' * 100
      elsif current_user.usertype === "Fammember"
        @caregiver = Caregiver.find_by(id: params[:id])

@@ -1,14 +1,6 @@
 <%= bootstrap_form_for(patient, url:  fammember_patients_path, html: { method: :post }) do |f| %>
 
   <div class="field">
-    name of fammember: <%= current_user.first_name %>
-  </div>
-
-  <div class="field">
-    id of fammember: <%= @fammember.id %>
-  </div>
-
-  <div class="field">
 
     <%= f.text_field :first_name %>
   </div>

@@ -2,8 +2,9 @@ class TransactionsController < ApplicationController
   before_action :set_transaction, only: [:show, :edit, :update, :destroy]
   before_action :set_caregiver, only: [:show, :new, :create]
 
-  before_action :set_caregiver_email, only: [:show, :new, :create, :edit, :update]
-  before_action :is_authenticated_fammember, only: [:new]
+  before_action :set_caregiver_email, only: [:show, :new, :create]
+  before_action :is_authenticated, only: :new
+  before_action :is_authenticated_fammember, only: :new
 
 
   def index
@@ -51,6 +52,7 @@ class TransactionsController < ApplicationController
       @transaction3 = Transaction.find(params[:id]).update(cancelled: true)  #got error. not working.
     end
     redirect_to caregiver_path(current_user)
+
   end
 
   def destroy

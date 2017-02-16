@@ -13,11 +13,11 @@ class FammembersController < ApplicationController
     @review = Review.where(user_id: @user.id)
     @fammember = Fammember.find_by(user_id: params[:id])
     @patient = Patient.where(fammember_id: @fammember.id)
-    p '*' * 100
-    p @transaction_caregiver = Transaction.find_by(user_id: current_user.id).caregiver_id
-    p @caregivers = Caregiver.find_by(id: @transaction_caregiver).user_id
-    p @caregivers_name = User.find_by(id: @caregivers).first_name
-    p '*' * 100
+    if Transaction.find_by(user_id: current_user.id) != nil
+    @transaction_caregiver = Transaction.find_by(user_id: current_user.id).caregiver_id
+    @caregivers = Caregiver.find_by(id: @transaction_caregiver).user_id
+    @caregivers_name = User.find_by(id: @caregivers).first_name
+    end
   end
 
   def new

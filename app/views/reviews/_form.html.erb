@@ -12,12 +12,9 @@
   <% end %>
 
   <div class="field">
-    id of user: <%= @review.user.id %>
+    Name of user you're reviewing: <%= User.find_by(id: @review.user_id).first_name %>
   </div>
 
-  <div class="field">
-    id of transaction: <%= @transaction_id %>
-  </div>
 
   <div class="field">
     <div id="star-rating"></div>

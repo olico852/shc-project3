@@ -13,7 +13,7 @@ class ReviewsController < ApplicationController
   def new
     if current_user.usertype == 'Caregiver'
     @caregiver_user_id = Caregiver.find_by(user_id: current_user.id).id
-    @transaction_id = Transaction.find_by(caregiver_id: @caregiver_user_id).id
+    @transaction_id = Transaction.where(caregiver_id: @caregiver_user_id)
     p '8'*50
     p @transaction_id
     p '8'*50
@@ -33,6 +33,7 @@ class ReviewsController < ApplicationController
     @caregiver_user_id = Caregiver.find_by(user_id: current_user.id).id
     @review['transaction_id'] = Transaction.find_by(caregiver_id: @caregiver_user_id).id
     elsif current_user.usertype == 'Fammember'
+
     @review['transaction_id'] = Transaction.find_by(user_id: current_user.id).id
     end
     if @review.save

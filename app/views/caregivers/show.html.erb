@@ -7,30 +7,36 @@
 <table class="table table-bordered">
 <thead>
   <tr>
-    <th class="col-xs-3">Name of caregiver</th>
-    <th class="col-xs-3">Family Member</th>
-    <th class="col-xs-3">Start date of booking</th>
-    <th class="col-xs-3">Status</th>
+    <th class="col-xs-2">Name of caregiver</th>
+    <th class="col-xs-2">Family Member</th>
+    <th class="col-xs-2">Start date of booking</th>
+    <th class="col-xs-2">Status</th>
+    <th class="col-xs-2">Functions</th>
+    <th class="col-xs-2">Reviews</th>
   </tr>
 </thead>
 
 <tbody>
   <tr>
     <% if current_user.usertype === "Caregiver" %>
-    <td><%= User.find_by(id: params[:id]).first_name %><%= User.find_by(id: params[:id]).last_name %></td>
-    <td><%= User.find_by(id: @transaction.user_id).first_name %> <%= User.find_by(id: @transaction.user_id).last_name %></td>
-    <td><%= @transaction.start_date %></td>
+    <% @transaction.each do |t| %>
+    <td><%= User.find_by(id: params[:id]).first_name %> <%= User.find_by(id: params[:id]).last_name %></td>
+    <td><%= User.find_by(id: t.user_id).first_name %> <%= User.find_by(id: t.user_id).last_name %></td>
+    <td><%= t.start_date %></td>
     <td>
       <ul>
-        <li>Pending: <%= @transaction.pending %></li>
-        <li>Approved: <%= @transaction.approved %></li>
-        <li>Cancelled: <%= @transaction.approved %></li>
-        <li>Concluded: <%= @transaction.approved %></li>
+        <li>Pending: <%= t.pending %></li>
+        <li>Approved: <%= t.approved %></li>
       </ul>
     </td>
+    <td><%= link_to 'Edit', edit_caregiver_transaction_path(current_user.id, t.id) %></td>
+    <td><%=link_to 'New Review', new_caregiver_review_path(t.caregiver_id)%> </td>
+
   </tr>
+    <% end %>
 </tbody>
 </table>
+
 <% end %>
 </div>
 <br>
@@ -89,7 +95,7 @@
 </div>
 
 <br>
-<br> 
+<br>
 <center><h4>Review</h4></center>
 <div class="row">
 <table class="table table-bordered">

@@ -4,7 +4,7 @@
       Gender: <%= c.gender %><br>
       ID: <%= c.id %><br>
       <% @test = Caregiver.find_by(id: c.id).user_id %>
-      Name : <%= User.find_by(id: @test).first_name %><%= User.find_by(id: @test).last_name %>
+      Name : <%= User.find_by(id: @test).first_name %> <%= User.find_by(id: @test).last_name %>
       <%= link_to "Book now", new_caregiver_transaction_path(c.id) %>
     <% end %>
     </div>

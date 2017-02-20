@@ -14,11 +14,13 @@ class ReviewsController < ApplicationController
     if current_user.usertype == 'Caregiver'
     @caregiver_user_id = Caregiver.find_by(user_id: current_user.id).id
     @transaction_id = Transaction.where(caregiver_id: @caregiver_user_id)
-    p '8'*50
-    p @transaction_id
-    p '8'*50
+    @user_id = Transaction.find_by(caregiver_id: @caregiver_user_id).user_id
+    @reviewer = User.find_by(id: @user_id )
     elsif current_user.usertype == 'Fammember'
-    @transaction_id = Transaction.find_by(user_id: current_user.id).id
+    # @transaction_id = Transaction.find_by(user_id: current_user.id).id
+    @caregiver_id = Transaction.find_by(user_id: current_user.id).caregiver_id
+    @reviewer_user_id = Caregiver.find_by(id: @caregiver_id).user_id
+    @reviewer = User.find_by(id: @reviewer_user_id )
     end
     @review = current_user.reviews.build()
   end

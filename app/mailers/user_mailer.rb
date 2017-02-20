@@ -1,4 +1,4 @@
-class UserMailer < ApplicationMailer
+=class UserMailer < ApplicationMailer
   default from: 'topbanana909@gmail.com'
   layout 'mailer'
 

@@ -12,8 +12,6 @@ class CaregiversController < ApplicationController
 
   def show
       if current_user.usertype === "Caregiver"
-
-
       #  @caregiver = Caregiver.find_by(user_id: params[:id])
       #  @review = Review.where(user_id: current_user.id)
       #  p '*' * 100

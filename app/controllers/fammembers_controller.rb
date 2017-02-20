@@ -11,13 +11,16 @@ class FammembersController < ApplicationController
   def show
 
     @review = Review.where(user_id: @user.id)
-    @fammember = Fammember.find_by(user_id: params[:id])
-    @patient = Patient.where(fammember_id: @fammember.id)
-    if Transaction.find_by(user_id: current_user.id) != nil
+    @fammember = Fammember.find_by(user_id: params[:id]).id
+    @patient = Patient.where(fammember_id: @fammember)
+    # if Transaction.find_by(user_id: current_user.id) != nil
+    @transaction = Transaction.where(user_id: current_user.id)
+    p '%'*30
+    p @transaction.inspect
     @transaction_caregiver = Transaction.find_by(user_id: current_user.id).caregiver_id
     @caregivers = Caregiver.find_by(id: @transaction_caregiver).user_id
     @caregivers_name = User.find_by(id: @caregivers).first_name
-    end
+    # end
   end
 
   def new

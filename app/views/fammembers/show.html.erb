@@ -102,7 +102,7 @@
 
     <% @review.each do |review| %>
       <tr>
-        <td><%= @caregivers_name %></td>
+        <td><%= @caregivers_whole.first_name %> <%= @caregivers_whole.last_name %></td>
         <td><%= review.created_at %></td>
         <td><div class = "star-rating" data-score= <%= review.rating %></div></td>
         <td><%= review.comment %></td>

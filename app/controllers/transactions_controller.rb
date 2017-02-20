@@ -6,7 +6,6 @@ class TransactionsController < ApplicationController
   before_action :is_authenticated, only: :new
   before_action :is_authenticated_fammember, only: :new
 
-
   def index
     if current_user.usertype === "Fammember"
       @transactions = Transaction.all
@@ -20,14 +19,13 @@ class TransactionsController < ApplicationController
     @transaction = Transaction.new
   end
 
+
   def create
     @transaction = Transaction.new(transaction_params)
     @transaction.user_id = current_user.id
     @transaction.caregiver_id = @caregiver.id
+    @patients = Patient.where(fammember_id: Fammember.find_by(user_id: current_user.id))
     if @transaction.save
-      puts @caregiveremail.inspect
-      puts @caregiver.inspect
-
       UserMailer.fammember_transaction_email(current_user).deliver
       UserMailer.caregiver_transaction_email(@caregiveremail).deliver
       redirect_to root_path, notice: 'Thank you for booking with us.'
@@ -37,18 +35,16 @@ class TransactionsController < ApplicationController
   end
 
   def edit
-      puts "::::"*50
-      puts @transaction.inspect
   end
 
   def update
     @transaction = Transaction.find(params[:id]).update(transaction_params)
     @transaction2 = Transaction.find(params[:id]).update(pending: false)
-    puts "::::"*50
-    p transaction_params.inspect
+
     if transaction_params['approved'] == false
       @transaction3 = Transaction.find(params[:id]).update(cancelled: true)  #got error. not working.
     end
+
     redirect_to caregiver_path(current_user)
 
   end
@@ -62,8 +58,6 @@ private
 
   def set_transaction
     @transaction = Transaction.find(params[:id])
-    p 'show yourself'*20
-    p @transaction
   end
 
   def set_caregiver
@@ -75,6 +69,6 @@ private
   end
 
   def transaction_params
-    params.require(:transaction).permit(:start_date, :approved)
+    params.require(:transaction).permit(:start_date, :approved, :patient_id)
   end
 end

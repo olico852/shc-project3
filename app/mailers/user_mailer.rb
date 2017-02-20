@@ -1,4 +1,4 @@
-=class UserMailer < ApplicationMailer
+class UserMailer < ApplicationMailer
   default from: 'topbanana909@gmail.com'
   layout 'mailer'
 
@@ -23,9 +23,6 @@
 
   def fammember_transaction_email(user)
     @user = user
-    # @caregiveremail = User.find_by(id: Caregiver.find_by(id: params[:caregiver_id]).user_id)
-    # recipients = [@user.email, @caregiveremail.email]
-    @url = "localhost:3000/login"
     mail(to: @user.email, subject: "You have a new transaction")
   end
 

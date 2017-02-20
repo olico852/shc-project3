@@ -5,22 +5,20 @@ class FammembersController < ApplicationController
 
 
   def index
-
   end
 
   def show
-
     @review = Review.where(user_id: @user.id)
     @fammember = Fammember.find_by(user_id: params[:id]).id
     @patient = Patient.where(fammember_id: @fammember)
-    # if Transaction.find_by(user_id: current_user.id) != nil
+
     @transaction = Transaction.where(user_id: current_user.id)
-    p '%'*30
-    p @transaction.inspect
+    if Transaction.find_by(user_id: current_user.id) != nil
     @transaction_caregiver = Transaction.find_by(user_id: current_user.id).caregiver_id
+    @transaction_patient = Transaction.find_by(user_id: current_user.id).patient_id
     @caregivers = Caregiver.find_by(id: @transaction_caregiver).user_id
     @caregivers_name = User.find_by(id: @caregivers).first_name
-    # end
+    end
   end
 
   def new
@@ -31,7 +29,7 @@ class FammembersController < ApplicationController
   def create
     @user = User.new(fammember_params)
       if @user.save
-        # UserMailer.welcome_email(@user).deliver
+        UserMailer.welcome_email(@user).deliver
         @fammember = Fammember.new
         @fammember.user_id = @user.id
         if @fammember.save

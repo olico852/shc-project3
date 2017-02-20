@@ -1,7 +1,11 @@
 <%= bootstrap_form_for(:transaction, url: caregiver_transactions_path, html: { method: :post }) do |f| %>
 
   <div>
-    Name of requestor: <%= current_user.first_name %>
+    Name of requestor: <%= current_user.first_name %> <%= current_user.last_name %>
+  </div>
+
+  <div>
+    <%= f.collection_select :patient_id, Patient.where(fammember_id: Fammember.find_by(user_id: current_user.id)), :id, :first_name %>
   </div>
 
   <div>
@@ -11,6 +15,7 @@
   <div>
     <%= f.date_field :start_date %>
   </div>
+
   <div>
     <%= f.submit %>
   </div>

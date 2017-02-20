@@ -43,6 +43,4 @@ class Search < ApplicationRecord
       return caregivers
     end
 
-
-
 end

@@ -1,31 +1,36 @@
 <h1>Welcome back <%= @user.first_name %></h1>
 
 <li><%= link_to "Search", new_search_path %></li>
-<li><%= link_to "All transactions", transactions_path %></li>
 <li><%= link_to "New patient", new_fammember_patient_path(@user) %></li>
 
+<br>
+<br>
+<center><h4>List of Patients</h4></center>
 <div class="container">
+
+<div class="row">
 <table class="table table-bordered">
   <thead>
     <tr>
-      <th>Review</th>
-      <th>Rating</th>
-      <th>User</th>
+      <th>First name</th>
+      <th>Last name</th>
+      <th>Address</th>
+      <th>Gender</th>
+      <th>Frequency</th>
+      <th>Condition Description</th>
 
-
-      <th colspan="3"></th>
     </tr>
   </thead>
 
   <tbody>
-    <% @review.each do |review| %>
+    <% @patient.each do |patient| %>
       <tr>
-        <td><%= review.comment %></td>
-        <td><div class = "star-rating" data-score= <%= review.rating %></div></td>
-        <td><%= review.user_id %></td>
-        <td><%= link_to 'Show', review %></td>
-        <td><%= link_to 'Edit', edit_review_path(review) %></td>
-        <td><%= link_to 'Destroy', review, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td class="col-xs-2"><%= patient.first_name %></td>
+        <td class="col-xs-2"><%= patient.last_name %></td>
+        <td class="col-xs-2"><%= patient.address %></td>
+        <td class="col-xs-2"><%= patient.gender %></td>
+        <td class="col-xs-2"><%= patient.frequency %></td>
+        <td class="col-xs-2"><%= patient.condition_description %></td>
       </tr>
     <% end %>
   </tbody>
@@ -33,41 +38,85 @@
 </div>
 
 <br>
+<br>
+<center><h4>Your bookings</h4></center>
+<div class="row">
+<table class="table table-bordered">
+<thead>
+  <tr>
+    <th class="col-xs-2">Name of caregiver</th>
+    <th class="col-xs-2">For patient</th>
+    <th class="col-xs-2">Start date of booking</th>
+    <th class="col-xs-2">Status</th>
+    <th class="col-xs-2">Functions</th>
+    <th class="col-xs-2">Reviews</th>
+  </tr>
+</thead>
 
-<h1>List of Patients</h1>
+<tbody>
+  <tr>
+    <%= @transaction.each do |t| %>
+    <td><%= User.find_by(id: @caregivers).first_name %> <%= User.find_by(id: @caregivers).last_name %></td>
+    <td><%= @patient.inspect %></td>
+    <td><%= t.start_date %></td>
+    <td>
+      <ul>
+        <li>Pending: <%= t.pending %></li>
+        <li>Approved: <%= t.approved %></li>
+      </ul>
+    </td>
+    <td><%= link_to 'Edit', edit_transaction_path(t.id) %></td>
+    <td>  <% if t.approved == true %>
+      <%=link_to 'Write review', new_review_path%>
+    <% else %>
+        Unavailable
+    <% end %>
 
-<table>
+    </td>
+
+  </tr>
+  <% end %>
+</tbody>
+</table>
+
+</div>
+
+
+<br>
+<br>
+<center><h4>Review</h4></center>
+<div class="row">
+<table class="table table-bordered">
   <thead>
     <tr>
-      <th>first_name</th>
-      <th>last_name</th>
-      <th>address</th>
-      <th>gender</th>
-      <th>frequency</th>
-      <th>condition_description</th>
-
-      <th colspan="3"></th>
+      <th class="col-xs-1">Reviewed on</th>
+      <th class="col-xs-1">Review date</th>
+      <th class="col-xs-2">Rating</th>
+      <th class="col-xs-4">Comment</th>
+      <th class="col-xs-2">Functions</th>
     </tr>
   </thead>
 
   <tbody>
-    <% @patient.each do |patient| %>
+
+
+    <% @review.each do |review| %>
       <tr>
-        <td><%= patient.first_name %></td>
-        <td><%= patient.last_name %></td>
-        <td><%= patient.address %></td>
-        <td><%= patient.gender %></td>
-        <td><%= patient.frequency %></td>
-        <td><%= patient.condition_description %></td>
+        <td><%= @caregivers_name %></td>
+        <td><%= review.created_at %></td>
+        <td><div class = "star-rating" data-score= <%= review.rating %></div></td>
+        <td><%= review.comment %></td>
+        <td><%= link_to 'Edit', edit_fammember_review_path(review.user_id,review.id) %>
+      <%= link_to 'Destroy', fammember_review_path(review.user_id,review.id) , method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
+</div>
+</div>
 
+<%= link_to 'New Review', new_fammember_review_path(@user) %>
 
-
-
-<%= link_to 'New Review', new_review_path %>
 
 <script>
   $('.star-rating').raty({

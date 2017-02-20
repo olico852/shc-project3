@@ -1,4 +1,5 @@
 class SearchesController < ApplicationController
+  before_action :is_authenticated, only: [:update, :delete, :edit ]
 
   def new
     @search = Search.new
@@ -14,11 +15,13 @@ class SearchesController < ApplicationController
 
   def show
     @search = Search.find(params[:id])
-    puts @search
+    puts '::::::::'*20
+    puts @search.inspect
   end
 
   private
   def search_params
     params.require(:search).permit(:name, :language, :specialties, :yearsofexperience, :gender)
   end
+
 end

@@ -3,22 +3,22 @@ class ApplicationController < ActionController::Base
 
   def is_authenticated
     unless current_user
-      flash[:danger] = "Credentials Invalid!!"
+      flash[:danger] = "Please register to view the search results"
       redirect_to login_path
     end
   end
 
   def is_authenticated_caregiver
     unless current_user.usertype == 'Caregiver'
-      flash[:danger] = "Credentials Invalid!!"
-      redirect_to login_path
+      flash[:danger] = "Forbidden access!!"
+      redirect_to :back
     end
   end
 
   def is_authenticated_fammember
     unless current_user.usertype == 'Fammember'
-      flash[:danger] = "Credentials Invalid!!"
-      redirect_to login_path
+      flash[:danger] = "Forbidden access!!"
+      redirect_to :back
     end
   end
 

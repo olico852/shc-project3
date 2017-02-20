@@ -3,7 +3,6 @@ class CaregiversController < ApplicationController
   before_action :is_authenticated, only: [:search, :update, :delete, :edit, :show ]
 
   def index
-    # @caregivers = Caregiver.search(params[:search])
     @caregivers = Caregiver.all
   end
 
@@ -13,14 +12,25 @@ class CaregiversController < ApplicationController
 
   def show
       if current_user.usertype === "Caregiver"
-       @caregiver = Caregiver.find_by(user_id: params[:id])
-      #  p 'x' * 100
-      #  p @caregiver.gender
-      #  p 'x' * 100
+      #  @caregiver = Caregiver.find_by(user_id: params[:id])
+      #  @review = Review.where(user_id: current_user.id)
+      #  p '*' * 100
+      # #  p Transaction.
+      # #  p @transaction_caregiver = Transaction.find_by(user_id: current_user.id).caregiver_id
+      # #  p @caregivers = Caregiver.find_by(id: @transaction_caregiver).user_id
+      # #  p @caregivers_name = User.find_by(id: @caregivers).first_name
+
+        p "T" *100
+        p params
+       @caregiver = Caregiver.find_by!(user_id: params[:id])
        @review = Review.where(user_id: current_user.id)
-      #  p '*' * 50
-      #  p @review
-      #  p '*' * 50
+       p '*' * 100
+      @transaction = Transaction.where(caregiver_id: @caregiver.id)
+      p @transaction
+      #  @caregivers = Caregiver.find_by!(id: @transaction)
+      #  @caregivers_name = User.find_by!(id: @caregivers)
+
+       p '*' * 100
      elsif current_user.usertype === "Fammember"
        @caregiver = Caregiver.find_by(id: params[:id])
     end
@@ -29,8 +39,6 @@ class CaregiversController < ApplicationController
   def new
     @user = User.new
     @caregiver = Caregiver.new
-      p '*' * 100
-      p 'care'
   end
 
   def create
@@ -63,7 +71,8 @@ class CaregiversController < ApplicationController
   def destroy
     # Cloudinary::Api.delete_resources(Caregiver.user_id(params[@user.id]).photo])
     @user.destroy
-    redirect_to '/', notice: "Your account has been successfully deleted."
+    flash[:success] = "account has been successfully deleted."
+    redirect_to '/'
   end
 
   private

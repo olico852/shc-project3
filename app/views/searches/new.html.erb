@@ -1,16 +1,6 @@
 <h1>Custom Search</h1>
 <%= form_for @search, html: { class: "pure-form" } do |s| %>
 
-<div class="field">
-  <%= s.label :specialties %>
-  <%= s.select :specialties, options_for_select(@specialty), :include_blank => true %>
-</div>
-
-<div class="field">
-  <%= s.label :language %>
-  <%= s.select :language, options_for_select(@lang), :include_blank => true %>
-</div>
-
 
 <div class="field">
   <%= s.label :yearsofexperience %>

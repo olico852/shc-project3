@@ -6,22 +6,21 @@ class ReviewsController < ApplicationController
   end
 
   def show
+
   end
 
 
   def new
-    # @review = current_user.reviews.build(usertype: current_user.usertype)
-    # @review = current_user.reviews.build()
-
-      @review = current_user.reviews.build()
-      @transaction_id = Transaction.find_by(user_id: current_user.id).id
-
-
-    # @review = Review.find_by(user_id: current_user.id)
-    # @transaction_id = Transaction.find_by(user_id: current_user.id).id
-    # p '*' * 100
-    # p 'review'
-    # @caregiver = Caregiver.find_by(user_id: params[:fammember_id])
+    if current_user.usertype == 'Caregiver'
+    @caregiver_user_id = Caregiver.find_by(user_id: current_user.id).id
+    @transaction_id = Transaction.where(caregiver_id: @caregiver_user_id)
+    p '8'*50
+    p @transaction_id
+    p '8'*50
+    elsif current_user.usertype == 'Fammember'
+    @transaction_id = Transaction.find_by(user_id: current_user.id).id
+    end
+    @review = current_user.reviews.build()
   end
 
 
@@ -30,12 +29,13 @@ class ReviewsController < ApplicationController
 
   def create
     @review = current_user.reviews.build(review_params)
-    @review['transaction_id'] = Transaction.find_by(user_id: current_user.id).id
-    # p '*' * 50
-    # p review_params
-    # p @review
-    # p '*' * 50
+    if current_user.usertype == 'Caregiver'
+    @caregiver_user_id = Caregiver.find_by(user_id: current_user.id).id
+    @review['transaction_id'] = Transaction.find_by(caregiver_id: @caregiver_user_id).id
+    elsif current_user.usertype == 'Fammember'
 
+    @review['transaction_id'] = Transaction.find_by(user_id: current_user.id).id
+    end
     if @review.save
       flash[:success] = "Review created!"
       if current_user.usertype == 'Caregiver'
@@ -43,8 +43,7 @@ class ReviewsController < ApplicationController
       elsif current_user.usertype == 'Fammember'
         redirect_to fammember_path(current_user.id) and return
       end
-      # redirect_to :back, notice: "Your profile has been sucessfully created"
-      # format.html { redirect_to @review, notice: 'Review was successfully created.' }
+
     else
       redirect_to :back, notice: "Error..."
 

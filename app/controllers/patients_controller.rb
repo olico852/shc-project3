@@ -1,5 +1,6 @@
 class PatientsController < ApplicationController
   before_action :set_patient, only: [:show, :edit, :update, :destroy]
+  before_action :is_authenticated_fammember, only: [:new, :update, :destroy, :edit]
 
 
   def index
@@ -20,15 +21,11 @@ class PatientsController < ApplicationController
 
   def create
     @patient = Patient.new(patient_params)
-    # p '*' * 50
-    # p patient_params
-    # p '*' * 50
+
 
     @patient['fammember_id'] = Fammember.find_by(user_id: params[:fammember_id]).id
       if @patient.save
-        puts '*'*50
-        puts @fammember.inspect
-        puts '*'*50
+
         flash[:success] = "Your patient has been sucessfully created"
         redirect_to fammember_path(current_user.id)
 
@@ -45,7 +42,8 @@ class PatientsController < ApplicationController
 
   def destroy
     @patient.destroy
-    redirect_to '/', notice: "Your account has been successfully deleted."
+    flash[:success] = "patient has been successfully deleted."
+    redirect_to '/'
   end
 
   private

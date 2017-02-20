@@ -1,6 +1,4 @@
 class User < ApplicationRecord
-
-
   has_one :fammember, dependent: :destroy
   has_one :caregiver, dependent: :destroy
   has_many :reviews

@@ -1,24 +1,10 @@
 <h1>Search Results</h1>
-<div class="div">
-    <% @search.search_caregivers_languages.each do |c| %>
-    Language: <%= c.caregivers %><br>
-  <% end %>
-  </div>
-
-  <div class="div">
-      <% @search.search_caregivers_specialties.each do |c| %>
-      Specialties: <%= c.caregivers %><br>
-    <% end %>
-  </div>
-
-  <div class="div">
-    <% if @search.search_caregivers_attributes.empty? %>
-      <p>No records found</p>
-    <% else %>
     <% @search.search_caregivers_attributes.each do |c| %>
       Minimum years of experience: <%= c.yearsofexperience %><br>
       Gender: <%= c.gender %><br>
       ID: <%= c.id %><br>
+      <% @test = Caregiver.find_by(id: c.id).user_id %>
+      Name : <%= User.find_by(id: @test).first_name %><%= User.find_by(id: @test).last_name %>
       <%= link_to "Book now", new_caregiver_transaction_path(c.id) %>
     <% end %>
     </div>

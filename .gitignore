@@ -30,6 +30,14 @@ config/cloudinary.yml
 
 ###### search results display for lang and specialties
 
+<div>
+  <%= s.collection_check_boxes(:specialties, Specialty.all, :id, :ability, {:label => 'Specialty'}) %>
+</div>
+
+<div>
+  <%= s.collection_check_boxes(:languages, Language.all, :id, :sglang, {:label => 'Language '}) %>
+</div>
+
 <div class="field">
   <%= s.label :specialties %>
   <%= s.select :specialties, options_for_select(@specialty), :include_blank => true %>
@@ -37,8 +45,10 @@ config/cloudinary.yml
 
 <div class="field">
   <%= s.label :language %>
-  <%= s.select :language, options_for_select(@lang), :include_blank => true %>
+  <%= s.select :languages, options_for_select(@lang), :include_blank => true %>
 </div>
+
+
 
 
 

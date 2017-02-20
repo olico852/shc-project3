@@ -17,7 +17,7 @@ resources :reviews
   end
 
 
-  resources :transactions
+  # resources :transactions
   resources :searches
 
 

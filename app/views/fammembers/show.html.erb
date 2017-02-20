@@ -54,6 +54,7 @@
 
 <tbody>
   <tr>
+    <% if @transaction.present? %>
     <%= @transaction.each do |t| %>
     <td><%= User.find_by(id: @caregivers).first_name %> <%= User.find_by(id: @caregivers).last_name %></td>
     <td><%= @patient.inspect %></td>
@@ -74,6 +75,7 @@
     </td>
 
   </tr>
+  <% end %>
   <% end %>
 </tbody>
 </table>

@@ -40,7 +40,6 @@ class TransactionsController < ApplicationController
   def update
     @transaction = Transaction.find(params[:id]).update(transaction_params)
     @transaction2 = Transaction.find(params[:id]).update(pending: false)
-
     if transaction_params['approved'] == false
       @transaction3 = Transaction.find(params[:id]).update(cancelled: true)  #got error. not working.
     end

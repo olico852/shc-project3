@@ -12,7 +12,7 @@
   </thead>
 
   <tbody>
-    <%= bootstrap_form_for @transaction, url: caregiver_transaction_path(current_user.id, @transaction.id), html: {method: :patch} do |f| %>
+    <%= bootstrap_form_for @transaction, url: caregiver_transaction_path(:caregiver_id, @transaction.id), html: {method: :patch} do |f| %>
     <td><%= current_user.first_name%><%= current_user.last_name%> </td>
     <td><%= User.find_by(id: @transaction.user_id).first_name%><%= User.find_by(id: @transaction.user_id).last_name%> </td>
     <td><%= f.text_field :start_date, value: @transaction.start_date, :readonly => 'readonly' %></td>

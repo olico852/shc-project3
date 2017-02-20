@@ -12,7 +12,7 @@
   <% end %>
 
   <div class="field">
-    Name of user you're reviewing: <%= User.find_by(id: @review.user_id).first_name %>
+    Name of user you're reviewing: <%= @reviewer.first_name %>  <%= @reviewer.last_name %>
   </div>
 
 

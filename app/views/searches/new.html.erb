@@ -1,6 +1,14 @@
 <h1>Custom Search</h1>
 <%= form_for @search, html: { class: "pure-form" } do |s| %>
 
+<div>
+  <%= s.collection_check_boxes(:specialties, Specialty.all, :id, :ability, {:label => 'Specialty'}) %>
+</div>
+
+<div>
+  <%= s.collection_check_boxes(:languages, Language.all, :id, :sglang, {:label => 'Language '}) %>
+</div>
+
 <div class="field">
   <%= s.label :yearsofexperience %>
   <%= s.text_field :yearsofexperience, size: 10 %>

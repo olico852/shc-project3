@@ -38,7 +38,7 @@
 
 <br>
 <br>
-<center><h4>Your bookings</h4></center>
+<center><h4>Your Bookings</h4></center>
 <div class="row">
 <table class="table table-bordered">
 <thead>
@@ -57,7 +57,8 @@
     <% if @transaction.present? %>
     <%= @transaction.each do |t| %>
     <td><%= User.find_by(id: @caregivers).first_name %> <%= User.find_by(id: @caregivers).last_name %></td>
-    <td><%= @patient.inspect %></td>
+    <% @patient.each do |p| %>
+    <td><%= p.first_name %> <%= p.last_name %></td>
     <td><%= t.start_date %></td>
     <td>
       <ul>
@@ -75,6 +76,7 @@
     </td>
 
   </tr>
+  <% end %>
   <% end %>
   <% end %>
 </tbody>

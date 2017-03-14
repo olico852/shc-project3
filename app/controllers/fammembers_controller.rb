@@ -15,8 +15,6 @@ class FammembersController < ApplicationController
     @patient = Patient.where(fammember_id: @fammember)
     end
     if Transaction.find_by(user_id: current_user.id) != nil
-    p ':'*50
-    p  @transaction.inspect
     @transaction = Transaction.where(user_id: current_user.id)
     @transaction_caregiver = Transaction.find_by(user_id: current_user.id).caregiver_id
     @transaction_patient = Transaction.find_by(user_id: current_user.id).patient_id

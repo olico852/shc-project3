@@ -16,6 +16,9 @@ resources :reviews
     resources :reviews
   end
 
+  get 'edit_transaction' => 'transactions#edit'
+  put 'edit_transaction' => 'transactions#update'
+
 
   # resources :transactions
   resources :searches

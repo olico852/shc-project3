@@ -1,54 +1,30 @@
 class Search < ApplicationRecord
 
-  # Functions that belong to every instance
-
-  # def search_caregivers_languages
-  #   language = Language.where(sglang: self.language) if self.language.present?
-  #   # language.each do |c|
-  #   #   puts c.caregivers
-  #   # end
-  # end
-  #
-  # def search_caregivers_specialties
-  #   p self.specialties
-  #   specialties = Specialty.where(ability: self.specialties) if self.specialties.present?
-  #   # return specialties
-  # end
-  #
-  # def search_caregivers_attributes
-  #   caregivers = Caregiver.all
-  #   caregivers = caregivers.where(gender: self.gender) if gender.present?
-  #   caregivers = caregivers.where(yearsofexperience: self.yearsofexperience) if yearsofexperience.present?
-  #   return caregivers
-  # end
-
-  # def search_caregivers_languages
-  #   p 'hello' * 150
-  #   p self.language
-  #   language = Language.where(sglang: self.language) if self.language.present?
-  # end
-  #
-
-  # def search_caregivers_specialties
-  #   p 'BYE' * 150
-  #   p self.specialties
-  #   specialties = Specialty.where(ability: self.specialties) if self.specialties.present?
-  # end
-
-  # def self.search(search_project, search_client)
-  #   return scoped unless search_project.present? || search_client.present?
-  #   where(['project_name LIKE ? AND client LIKE ?', "%#{search_project}%", "%#{search_client}%"])
-  # end
-
     def search_caregivers_attributes
       caregivers = Caregiver.all
-      # caregivers = caregivers.where(gender: self.gender) if gender.present?
-      # caregivers = caregivers.where(yearsofexperience: self.yearsofexperience) if yearsofexperience.present?
-      caregivers = caregivers.where(["yearsofexperience >= ?", yearsofexperience]) if yearsofexperience.present?
-      caregivers = caregivers.where(["gender LIKE ?", gender]) if gender.present?
-      # specialties = Specialty.where(ability: self.specialties) if self.specialties.present?
-      # @caregivers = CaregiversSpecialties.all.where(specialty_id: specialties).where(caregiver_id: caregivers)
-      # debugger
+      caregivers = caregivers.where("yearsofexperience >= ?", yearsofexperience) if yearsofexperience.present?
+      caregivers = caregivers.where("lower(gender) LIKE ?", gender.downcase) if gender.present?
+      if self.specialties.present?
+        arr = JSON.parse(self.specialties)
+        p 'arr contains ...'
+        puts arr.length
+        if arr.length > 1 # cos there's alaways a blank string being submitted.
+          caregiversSpecialty = CaregiversSpecialties.where(specialty_id: arr.map {|x|  x.to_i}).pluck(:caregiver_id)
+          p 'caregivers located...? '
+          p caregiversSpecialty
+          caregivers = caregivers.where(id: caregiversSpecialty)
+        end
+      end
+      if self.languages.present?
+        arr = JSON.parse(self.languages)
+        if arr.length > 1  # cos there's alaways a blank string being submitted.
+          caregiversLanguages = CaregiversLanguages.where(language_id: arr.map {|x|  x.to_i}).pluck(:caregiver_id)
+          p 'caregivers located...? '
+          p caregiversLanguages
+          caregivers = caregivers.where(id: caregiversLanguages)
+        end
+      end
+
       return caregivers
     end
 

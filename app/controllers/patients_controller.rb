@@ -23,7 +23,7 @@ class PatientsController < ApplicationController
     @patient = Patient.new(patient_params)
 
 
-    @patient['fammember_id'] = Fammember.find_by(user_id: params[:fammember_id]).id
+    @patient['fammember_id'] = Fammember.find_by(user_id: params[:fammember_id])
       if @patient.save
 
         flash[:success] = "Your patient has been sucessfully created"

@@ -9,7 +9,9 @@ class FammembersController < ApplicationController
 
   def show
     @review = Review.where(user_id: @user.id)
-    @fammember = Fammember.find_by(user_id: params[:id]).id
+    @fammember = Fammember.find_by(user_id: params[:id])
+    p '#' * 50
+    puts @fammember.inspect
 
     if Patient.where(fammember_id: Fammember.find_by(user_id: current_user.id)) != nil
     @patient = Patient.where(fammember_id: @fammember)
